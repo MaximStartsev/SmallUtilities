@@ -1,0 +1,29 @@
+﻿<Window x:Class="WindowMovier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WindowMovier"
+        mc:Ignorable="d" ShowInTaskbar="False"
+        Title="Window Movier" Height="400" Width="600" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="WindowsListBox" SelectionMode="Multiple" />
+        <StackPanel Grid.Column="1">
+            <ComboBox x:Name="ScreensComboBox" Width="200" Margin="2"/>
+            <Button Content="Переместить" Margin="2" Click="Click_Move">
+                <Button.ToolTip >
+                    <TextBlock Text="Переместить выделенные в списке окна на выбранный экран"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Content="Переместить все" Margin="2" Click="Click_Move_All">
+                <Button.ToolTip >
+                    <TextBlock Text="Переместить выделенные в списке окна на выбранный экран"/>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
