@@ -89,6 +89,7 @@ namespace WindowMovier
         {
             if (NotifyIcon!=null)
             {
+                NotifyIcon.Visible = false;
                 NotifyIcon.Dispose();
             }
         }

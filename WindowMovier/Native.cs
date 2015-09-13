@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text;
 using WindowState = System.Windows.WindowState;
 
 namespace WindowMovier
@@ -74,6 +76,47 @@ namespace WindowMovier
                 throw new ArgumentException("Parameter hWnd can't be zero.");
             }
         }
+        //Список окон
+        public delegate bool WindowEnumCallback(int hwnd, int lparam);
 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumWindows(WindowEnumCallback lpEnumFunc, int lParam);
+
+        [DllImport("user32.dll")]
+        public static extern void GetWindowText(int h, StringBuilder s, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        public static extern bool IsWindowVisible(int h);
+
+        public delegate bool EnumDelegate(IntPtr hWnd, int lParam);
+        /// <summary>
+        /// enumarator on all desktop windows
+        /// </summary>
+        /// <param name="hDesktop"></param>
+        /// <param name="lpEnumCallbackFunction"></param>
+        /// <param name="lParam"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll", EntryPoint = "EnumDesktopWindows",
+        ExactSpelling = false, CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool EnumDesktopWindows(IntPtr hDesktop, EnumDelegate lpEnumCallbackFunction, IntPtr lParam);
+        /// <summary>
+        /// check if windows visible
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWindowVisible(IntPtr hWnd);
+        /// <summary>
+        /// return windows text
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="lpWindowText"></param>
+        /// <param name="nMaxCount"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll", EntryPoint = "GetWindowText",
+        ExactSpelling = false, CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpWindowText, int nMaxCount);
     }
 }

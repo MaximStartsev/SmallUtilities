@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -21,17 +23,26 @@ namespace WindowMovier
             {
                 ScreensComboBox.Items.Add(new ScreenItem(screen));
             }
-            Process[] processlist = Process.GetProcesses();
-
-            foreach (Process process in processlist)
+            UpdateWindowsList();
+        }
+        private void UpdateWindowsList()
+        {
+            WindowsListBox.Items.Clear();
+            NativeMethods.EnumDelegate filter = delegate (IntPtr hWnd, int lParam)
             {
-                if (!String.IsNullOrEmpty(process.MainWindowTitle))
+                StringBuilder strbTitle = new StringBuilder(255);
+                int nLength = NativeMethods.GetWindowText(hWnd, strbTitle, strbTitle.Capacity + 1);
+                string strTitle = strbTitle.ToString();
+
+                if (NativeMethods.IsWindowVisible(hWnd) && !string.IsNullOrEmpty(strTitle) && strTitle!="Пуск" && strTitle!="Start")
                 {
-                    var screenWindow = new ScreenWindow(process);
-                    screenWindow.Exited += ScreenWindow_Exited;
+                    var screenWindow = new ScreenWindow(hWnd, strTitle);
                     WindowsListBox.Items.Add(screenWindow);
                 }
-            }
+                return true;
+            };
+
+            NativeMethods.EnumDesktopWindows(IntPtr.Zero, filter, IntPtr.Zero);
         }
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -67,6 +78,11 @@ namespace WindowMovier
                     item.Move(screen);
                 }
             }
+        }
+
+        private void Click_Refresh(object sender, RoutedEventArgs e)
+        {
+            UpdateWindowsList();
         }
     }
 }

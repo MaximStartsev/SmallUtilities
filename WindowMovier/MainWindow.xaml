@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WindowMovier"
         mc:Ignorable="d" ShowInTaskbar="False"
-        Title="Window Movier" Height="400" Width="600" >
+        Title="Window Movier" Height="400" Width="600" Icon="Arrow.ico" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -21,7 +21,12 @@
             </Button>
             <Button Content="Переместить все" Margin="2" Click="Click_Move_All">
                 <Button.ToolTip >
-                    <TextBlock Text="Переместить выделенные в списке окна на выбранный экран"/>
+                    <TextBlock Text="Переместить все окна на выбранный экран"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Content="Обновить" Margin="2" Click="Click_Refresh">
+                <Button.ToolTip >
+                    <TextBlock Text="Обновить список окон"/>
                 </Button.ToolTip>
             </Button>
         </StackPanel>
