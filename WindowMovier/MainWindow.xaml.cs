@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
@@ -23,6 +21,7 @@ namespace WindowMovier
             {
                 ScreensComboBox.Items.Add(new ScreenItem(screen));
             }
+            ScreensComboBox.SelectedIndex = 0;
             UpdateWindowsList();
         }
         private void UpdateWindowsList()
