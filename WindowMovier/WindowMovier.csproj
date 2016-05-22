@@ -7,7 +7,7 @@
     <ProjectGuid>{F35512B8-EB02-45B4-89E5-24B8DD42D5A0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowMovier</RootNamespace>
+    <RootNamespace>MaximStartsev.SmallUtilities.WindowMovier</RootNamespace>
     <AssemblyName>WindowMovier</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

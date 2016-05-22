@@ -1,7 +1,6 @@
-﻿<Application x:Class="WindowMovier.App"
+﻿<Application x:Class="MaximStartsev.SmallUtilities.WindowMovier.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WindowMovier"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

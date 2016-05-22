@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using WindowState = System.Windows.WindowState;
 
-namespace WindowMovier
+namespace MaximStartsev.SmallUtilities.WindowMovier
 {
     /// <summary>
     /// Обёртка для функций winapi

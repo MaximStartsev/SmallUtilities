@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace WindowMovier
+namespace MaximStartsev.SmallUtilities.WindowMovier
 {
     /// <summary>
     /// Данный класс представляет собой открытое на одном из экранов окно

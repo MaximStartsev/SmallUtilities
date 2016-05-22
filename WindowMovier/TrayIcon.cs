@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
 
-namespace WindowMovier
+namespace MaximStartsev.SmallUtilities.WindowMovier
 {
     class TrayIcon:IDisposable
     {

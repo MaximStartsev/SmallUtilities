@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Screen = System.Windows.Forms.Screen;
 
-namespace WindowMovier
+namespace MaximStartsev.SmallUtilities.WindowMovier
 {
     class ScreenItem: ComboBoxItem
     {

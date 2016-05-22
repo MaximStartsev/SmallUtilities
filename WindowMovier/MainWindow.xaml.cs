@@ -3,7 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace WindowMovier
+namespace MaximStartsev.SmallUtilities.WindowMovier
 {
     public struct Rect
     {
