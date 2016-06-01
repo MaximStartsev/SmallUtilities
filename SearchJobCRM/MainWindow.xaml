@@ -4,8 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600">
+        Title="Search Job CRM" Height="400" Width="600">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Вакансии">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="VacancyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Компании">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="CompanyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="1" Height="24">
+            <TextBlock Text="{Binding StatusBar}"/>
+        </StatusBar>
     </Grid>
 </Window>

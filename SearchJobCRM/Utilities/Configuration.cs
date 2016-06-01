@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
 {
@@ -11,11 +10,43 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
     /// </summary>
     class Configuration
     {
-        public void Load()
+        private const string FILENAME = "conf.xml";
+
+        private static Configuration _instance;
+        public static Configuration Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Configuration();
+                    _instance.Load();
+                }
+                return _instance;
+            }   
+        }
+
+        private Configuration()
+        {
+            if (File.Exists(FILENAME))
+            {
+                Load();
+            }
+            else
+            {
+                InitializeDefaultConfiguration();
+            }
+        }
+
+        private void Load()
         {
 
         }
-        public void Save()
+        private void Save()
+        {
+
+        }
+        private void InitializeDefaultConfiguration()
         {
 
         }

@@ -79,8 +79,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActiveRecordBase.cs" />
+    <Compile Include="FieldAttribute.cs" />
     <Compile Include="Utilities\Configuration.cs" />
-    <Compile Include="Utilities\DatabaseInitializer.cs" />
+    <Compile Include="Utilities\Database.cs" />
     <Compile Include="Models\Vacancy.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

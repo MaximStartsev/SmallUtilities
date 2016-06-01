@@ -15,6 +15,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModels.MainViewModel();
         }
     }
 }
