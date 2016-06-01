@@ -1,3 +1,3 @@
 # SmallUtilities
-Small programms for Windows
+Small programms for Windows.\n
 WindowMovier - a program to move application windows from one screen to another.
