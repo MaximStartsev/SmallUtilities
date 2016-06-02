@@ -9,6 +9,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
     {
         public String StatusBar { get; private set; }
         public List<Vacancy> Vacancies;
+
         public MainViewModel()
         {
             StatusBar = "Готово";
@@ -17,10 +18,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private void InvokePropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

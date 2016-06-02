@@ -80,6 +80,7 @@
     </ApplicationDefinition>
     <Compile Include="ActiveRecordBase.cs" />
     <Compile Include="FieldAttribute.cs" />
+    <Compile Include="Models\Error.cs" />
     <Compile Include="Utilities\Configuration.cs" />
     <Compile Include="Utilities\Database.cs" />
     <Compile Include="Models\Vacancy.cs" />
@@ -91,6 +92,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\ErrorRegistrator.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
