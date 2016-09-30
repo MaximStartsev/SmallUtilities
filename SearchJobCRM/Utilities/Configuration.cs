@@ -23,7 +23,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
                     _instance.Load();
                 }
                 return _instance;
-            }   
+            }
         }
 
         private Configuration()

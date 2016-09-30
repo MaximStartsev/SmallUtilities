@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
 {
-    class Company: ActiveRecordBase
+    class Company
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         /// <summary>
         /// Список вакансий
         /// </summary>
@@ -34,10 +33,6 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
         /// Текущая стадия диалога
         /// </summary>
         public string CurrentStage { get; set; }
-        /// <summary>
-        /// Собственно, диалог (общие положения)
-        /// </summary>
-        public List<string> Messages { get; set; }
         /// <summary>
         /// Комментарий
         /// </summary>

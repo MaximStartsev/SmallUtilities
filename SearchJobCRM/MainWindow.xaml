@@ -6,6 +6,20 @@
         mc:Ignorable="d"
         Title="Search Job CRM" Height="400" Width="600">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="CellTemplate"  TargetType="{x:Type DataGridCell}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <TextBlock Text="{Binding}"/>
+                                <!--<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/> -->
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
@@ -13,12 +27,32 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="Вакансии">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="VacancyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="VacancyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              AutoGenerateColumns="True" ItemsSource="{Binding Vacancies}" CanUserAddRows="True"
+                              CanUserDeleteRows="True"/>
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Button Content="Show" Margin="2" Padding="4,2"/>
+                        <Button Content="Save" Margin="2" Padding="4,2" Command="{Binding SaveCommand}"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Компании">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="CompanyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="CompanyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              AutoGenerateColumns="True" ItemsSource="{Binding Companies}" CanUserAddRows="True"
+                              CanUserDeleteRows="True" />
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Button Content="Show" Margin="2" Padding="4,2"/>
+                        <Button Content="Save" Margin="2" Padding="4,2" Command="{Binding SaveCommand}"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

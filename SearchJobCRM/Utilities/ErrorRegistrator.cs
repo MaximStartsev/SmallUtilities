@@ -28,6 +28,5 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
         {
             RegisterError(sender, new Error(title, message, stacktrace));
         }
-        
     }
 }
