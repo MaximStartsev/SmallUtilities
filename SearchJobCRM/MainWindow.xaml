@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="Search Job CRM" Height="400" Width="600">
+        mc:Ignorable="d" WindowState="Maximized"
+        Title="Search Job CRM" Height="400" Width="800">
     <Grid>
         <Grid.Resources>
             <Style x:Key="CellTemplate"  TargetType="{x:Type DataGridCell}">
@@ -25,14 +25,53 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TabItem Header="Вакансии">
+
+            <TabItem Header="Компании">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="CompanyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              AutoGenerateColumns="False" ItemsSource="{Binding Companies}" CanUserAddRows="True"
+                              CanUserDeleteRows="True" SelectedItem="{Binding SelectedCompany, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Width="100" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Контактное лицо" Width="120" Binding="{Binding ContactPerson}" />
+                            <DataGridTextColumn Header="Телефон" Width="60" Binding="{Binding Phone}" />
+                            <DataGridTextColumn Header="Емейл" Width="50" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Скайп" Width="50" Binding="{Binding Skype}" />
+                            <DataGridTextColumn Header="Этап диалога" Width="100" Binding="{Binding CurrentStage}" />
+                            <DataGridTextColumn Header="Комментарий" Width="200" Binding="{Binding Comment}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"
+                              AutoGenerateColumns="False" ItemsSource="{Binding Path=SelectedCompanyVacancies}"
+                              CanUserAddRows="True" CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Width="100" Binding="{Binding Title}" />
+                            <DataGridTextColumn Header="Зарплата" Width="70" Binding="{Binding Salary}" />
+                            <DataGridTextColumn Header="Описание" Width="200" Binding="{Binding Description}" />
+                            <DataGridTextColumn Header="Обязанности" Width="200" Binding="{Binding Responsibilities}"/>
+                            <DataGridTextColumn Header="Требуемые навыки" Width="200" Binding="{Binding RequiredSkills}" />
+                            <DataGridTextColumn Header="Условия" Width="200" Binding="{Binding Conditions}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Vertical" Grid.Column="2">
+                        <Button Content="Show" Margin="2" Padding="4,2"/>
+                        <Button Content="Save" Margin="2" Padding="4,2" Command="{Binding SaveCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Все вакансии">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="VacancyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                              AutoGenerateColumns="True" ItemsSource="{Binding Vacancies}" CanUserAddRows="True"
+                              AutoGenerateColumns="True" ItemsSource="{Binding Vacancies}" CanUserAddRows="False"
                               CanUserDeleteRows="True"/>
                     <StackPanel Orientation="Vertical" Grid.Column="1">
                         <Button Content="Show" Margin="2" Padding="4,2"/>
@@ -40,21 +79,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Компании">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="CompanyDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                              AutoGenerateColumns="True" ItemsSource="{Binding Companies}" CanUserAddRows="True"
-                              CanUserDeleteRows="True" />
-                    <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <Button Content="Show" Margin="2" Padding="4,2"/>
-                        <Button Content="Save" Margin="2" Padding="4,2" Command="{Binding SaveCommand}"/>
-                    </StackPanel>
-                </Grid>
-            </TabItem>
+
         </TabControl>
         <StatusBar Grid.Row="1" Height="24">
             <TextBlock Text="{Binding StatusBar}"/>

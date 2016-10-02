@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
 {
     class Company
     {
+        public Company()
+        {
+            Vacancies = new ObservableCollection<Vacancy>();
+        }
+
         public int Id { get; set; }
-        /// <summary>
-        /// Список вакансий
-        /// </summary>
-        public List<Vacancy> Vacancies { get; private set; }
+
         /// <summary>
         /// Название компании
         /// </summary>
@@ -37,5 +40,9 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
         /// Комментарий
         /// </summary>
         public string Comment { get; set; }
+        /// <summary>
+        /// Список вакансий
+        /// </summary>
+        public virtual ObservableCollection<Vacancy> Vacancies { get; set; }
     }
 }
