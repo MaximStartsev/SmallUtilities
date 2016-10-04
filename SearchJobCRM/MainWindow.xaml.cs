@@ -23,5 +23,10 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM
         {
             (sender as DataGrid).CommitEdit();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

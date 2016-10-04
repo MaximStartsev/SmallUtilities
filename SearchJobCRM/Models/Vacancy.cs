@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
 {
     class Vacancy
     {
+        public Vacancy()
+        {
+            Dialog = new ObservableCollection<DialogMessage>();
+        }
         public int Id { get; set; }
         /// <summary>
         /// Название вакансии
@@ -33,7 +38,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
         /// Условия
         /// </summary>
         public string Conditions { get; set; }
-        public virtual IEnumerable<DialogMessage> Dialog { get; set; }
+        public virtual ObservableCollection<DialogMessage> Dialog { get; set; }
     }
     public class Student
     {

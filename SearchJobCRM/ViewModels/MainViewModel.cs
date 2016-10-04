@@ -20,38 +20,69 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
 
         #region Selected company
         private Company _selectedCompany;
-        public Company SelectedCompany
+        public object SelectedCompany
         {
             get { return _selectedCompany; }
             set
             {
                 if (_selectedCompany != value)
                 {
-                    _selectedCompany = value;
-                    InvokePropertyChanged("SelectedCompany");
-                    InvokePropertyChanged("CanAddVacancy");
-                    InvokePropertyChanged("SelectedCompanyVacancies");
+                    if(value as Company != null)
+                    {
+                        _selectedCompany = (Company)value;
+                    }
+                    else
+                    {
+                        _selectedCompany = null;
+                        SelectedVacancy = null;
+                    }
+                    InvokePropertyChanged(nameof(SelectedCompany));
+                    InvokePropertyChanged(nameof(SelectedCompanyVacancies));
                 }
             }
         }
+        public IEnumerable SelectedCompanyVacancies { get { return SelectedCompany == null ? null : _selectedCompany.Vacancies; } }
         #endregion
-        public IEnumerable SelectedCompanyVacancies
+        #region Selected vacancy
+        private Vacancy _selectedVacancy;
+        public object SelectedVacancy
         {
-            get
+            get { return _selectedVacancy; }
+            set
             {
-                return SelectedCompany == null ? null : SelectedCompany.Vacancies;
+                if (_selectedVacancy != value)
+                {
+                    if(value as Vacancy != null)
+                    {
+                        _selectedVacancy = (Vacancy)value;
+                    }
+                    else
+                    {
+                        _selectedVacancy = null;
+                    }
+                    InvokePropertyChanged(nameof(SelectedVacancy));
+                    InvokePropertyChanged(nameof(SelectedVacancyDialog));
+                }
             }
         }
-        public bool CanAddVacancy
+        public IEnumerable SelectedVacancyDialog { get { return SelectedVacancy == null ? null : _selectedVacancy.Dialog; } }
+        #endregion
+        private int _tabIndex = 0;
+        public int TabIndex
         {
-            get
+            get { return _tabIndex; }
+            set
             {
-                //  return SelectedCompany != null;
-                return true;
+                if (_tabIndex != value)
+                {
+                    _tabIndex = value;
+                    InvokePropertyChanged(nameof(TabIndex));
+                    SelectedCompany = null;
+                    SelectedVacancy = null;
+                }
             }
         }
-
-        public ICommand AddCompanyCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
         public ICommand SaveCommand { get; private set; }
         private readonly DatabaseContext _dbContext;
         public MainViewModel()
@@ -69,7 +100,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 {
                     company.Vacancies.CollectionChanged += Vacancies_CollectionChanged1;
                 }
-                AddCompanyCommand = new DelegateCommand(o => AddCompany());
+                ShowCommand = new DelegateCommand(o => Show());
                 SaveCommand = new DelegateCommand(o=>Save());
             }
             catch(Exception ex)
@@ -119,9 +150,9 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 case NotifyCollectionChangedAction.Add:
                     foreach (Vacancy item in e.NewItems)
                     {
-                        if(SelectedCompany != null)
+                        if(_selectedCompany != null)
                         {
-                            item.Company = SelectedCompany;
+                            item.Company = _selectedCompany;
                         }
                         _dbContext.Vacancies.Add(item);
                     }
@@ -174,9 +205,10 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
         {
             _dbContext.SaveChanges();
         }
-        private void AddCompany()
+        private void Show()
         {
-            _dbContext.Companies.Add(new Company() { Name = "Test" });
+            //_dbContext.Companies.Add(new Company() { Name = "Test" });
+            MessageBox.Show("Test");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
