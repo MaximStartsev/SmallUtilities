@@ -62,10 +62,12 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                     }
                     InvokePropertyChanged(nameof(SelectedVacancy));
                     InvokePropertyChanged(nameof(SelectedVacancyDialog));
+                    InvokePropertyChanged(nameof(VacancySelected));
                 }
             }
         }
         public IEnumerable SelectedVacancyDialog { get { return SelectedVacancy == null ? null : _selectedVacancy.Dialog; } }
+        public bool VacancySelected { get { return SelectedVacancyDialog != null; } }
         #endregion
         private int _tabIndex = 0;
         public int TabIndex
@@ -208,7 +210,13 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
         private void Show()
         {
             //_dbContext.Companies.Add(new Company() { Name = "Test" });
-            MessageBox.Show("Test");
+            //MessageBox.Show("Test");
+            if(SelectedVacancy as Vacancy != null)
+            {
+                var di = new VacancyDetailedViewModel((Vacancy)SelectedVacancy);
+                di.Show();
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

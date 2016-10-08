@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +12,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModels.MainViewModel();
+            DataContext = new MainViewModel();
         }
 
         private void CompanyDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
