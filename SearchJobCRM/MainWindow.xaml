@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:utilities="clr-namespace:MaximStartsev.SmallUtilities.SearchJobCRM.Utilities"
-        mc:Ignorable="d" WindowState="Maximized"
-        Title="Search Job CRM" Height="400" Width="800">
+        mc:Ignorable="d" WindowState="Maximized" Closing="Window_Closing"
+        Title="Search Job CRM" Height="400" Width="800" >
     <Grid>
         <Grid.Resources>
             <Style x:Key="CellTemplate"  TargetType="{x:Type DataGridCell}">
@@ -62,14 +62,14 @@
                             <DataGridTextColumn Header="Условия" Width="200" Binding="{Binding Conditions}" />-->
                         </DataGrid.Columns>
                     </DataGrid>
-                    <GridSplitter Width="2" Grid.Column="1" />
+                    <!--<GridSplitter Width="2" Grid.Column="1" />-->
                     <DataGrid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2"
                               AutoGenerateColumns="False" ItemsSource="{Binding Path=SelectedVacancyDialog}"
                               CanUserAddRows="True" CanUserDeleteRows="True"
                               Visibility="{Binding Path=VacancySelected, Converter={StaticResource BoolConverter}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Сообщение" Width="200" Binding="{Binding Message}" />
-                            <DataGridTextColumn Header="Время" Width="70" Binding="{Binding Date}" />
+                            <DataGridTextColumn Header="Время" Width="140" Binding="{Binding Date}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -99,7 +99,7 @@
                               Visibility="{Binding Path=DialogsVisible, Converter={StaticResource BoolConverter}}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Сообщение" Width="200" Binding="{Binding Message}" />
-                            <DataGridTextColumn Header="Время" Width="70" Binding="{Binding Date}" />
+                            <DataGridTextColumn Header="Время" Width="140" Binding="{Binding Date}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

@@ -6,12 +6,18 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
     {
         public bool IsOpened { get; private set; }
         public abstract string Title { get; set; }
+        public abstract double DefaultWidth { get; }
+        public abstract double DefaultHeight { get; }
         public virtual void Show()
         {
             if (!IsOpened)
             {
-                MVVMFactory.Show(this);
+                MVVMCore.Show(this);
                 IsOpened = true;
+            }
+            else
+            {
+                MVVMCore.Activate(this);
             }
         }
         public virtual void Hide()
@@ -19,7 +25,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
             if (IsOpened)
             {
                 IsOpened = false;
-                MVVMFactory.Hide(this);
+                MVVMCore.Hide(this);
             }
         }
     }

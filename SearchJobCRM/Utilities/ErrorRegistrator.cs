@@ -5,11 +5,9 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
 {
     class RegisteredErrorArgs : EventArgs
     {
-        public object Sender { get; private set; }
         public Error Error { get; private set; }
-        public RegisteredErrorArgs(object sender, Error error)
+        public RegisteredErrorArgs(Error error)
         {
-            Sender = sender;
             Error = error;
         }
     }
@@ -20,13 +18,9 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
     {
         public static event EventHandler<RegisteredErrorArgs> RegisteredError;
 
-        public static void RegisterError(this object sender, Error error)
+        public static void Show(this Exception ex)
         {
-            RegisteredError?.Invoke(null, new RegisteredErrorArgs(sender, error));
-        }
-        public static void RegisterError(this object sender, string title, string message, string stacktrace)
-        {
-            RegisterError(sender, new Error(title, message, stacktrace));
+            RegisteredError?.Invoke(null, new RegisteredErrorArgs(new Error(ex)));
         }
     }
 }

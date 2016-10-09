@@ -54,7 +54,7 @@
                               CanUserAddRows="True" CanUserDeleteRows="True" Grid.RowSpan="7">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Сообщение" Width="200" Binding="{Binding Message}" />
-                <DataGridTextColumn Header="Время" Width="70" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Время" Width="140" Binding="{Binding Date}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

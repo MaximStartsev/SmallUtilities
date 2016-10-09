@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
 {
-    public static class MVVMFactory
+    public static class MVVMCore
     {
+        public static Window MainWindow { get; set; }
         private readonly static Dictionary<ViewModel, Window> _openedWindows = new Dictionary<ViewModel, Window>();
 
         private static IEnumerable<Type> _views;
@@ -38,42 +38,39 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
         }
         public static void Show(ViewModel viewModel)
         {
-            try
+            if (viewModel == null)
             {
-                if (viewModel == null)
-                {
-                    throw new ArgumentNullException("viewModel");
-                }
-                var name = viewModel.GetType().Name;
-                var viewName = name.Remove(name.Length - "Model".Length);
-                var view = Views.FirstOrDefault(v => v.Name == viewName);
-                if (view == null)
-                {
-                    throw new Exception(String.Format("Не удалось найти представление для модели представления {0}", name));
-                }
-                var control = (UserControl)Activator.CreateInstance(view);
-                //var popup = new Popup();
-                //popup.Child = control;
-                //popup.DataContext = viewModel;
-                //popup.IsOpen = true;
-                var window = new Window();
-                window.Content = control;
-                //window.Title = viewModel.Title;
-                window.SetBinding(Window.TitleProperty, "Title");
-                window.DataContext = viewModel;
-                _openedWindows.Add(viewModel,window);
-                window.Closed += (s, e) =>
-                {
-                    viewModel.Hide();
-
-                };
-                window.Show();
+                throw new ArgumentNullException("viewModel");
             }
-            catch (Exception ex)
+            var name = viewModel.GetType().Name;
+            var viewName = name.Remove(name.Length - "Model".Length);
+            var view = Views.FirstOrDefault(v => v.Name == viewName);
+            if (view == null)
             {
+                throw new Exception(String.Format("Не удалось найти представление для модели представления {0}", name));
+            }
+            var control = (UserControl)Activator.CreateInstance(view);
+            var window = new Window();
+            window.Content = control;
+            window.SetBinding(Window.TitleProperty, "Title");
+            window.DataContext = viewModel;
+            window.Width = viewModel.DefaultWidth;
+            window.Height = viewModel.DefaultHeight;
+            _openedWindows.Add(viewModel, window);
+            window.Closed += (s, e) =>
+            {
+                viewModel.Hide();
+            };
+            window.Owner = MainWindow;
+            window.Show();
+        }
+        public static void Activate(ViewModel viewModel)
+        {
+            if (_openedWindows.ContainsKey(viewModel))
+            {
+                _openedWindows[viewModel].Activate();
             }
         }
-
         public static void Hide(ViewModel viewModel)
         {
             if (_openedWindows.ContainsKey(viewModel))

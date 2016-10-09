@@ -101,6 +101,9 @@
     <Compile Include="Utilities\Configuration.cs" />
     <Compile Include="Models\Vacancy.cs" />
     <Compile Include="ViewModels\VacancyDetailedViewModel.cs" />
+    <Compile Include="Views\ErrorView.xaml.cs">
+      <DependentUpon>ErrorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VacancyDetailedView.xaml.cs">
       <DependentUpon>VacancyDetailedView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ErrorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\VacancyDetailedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

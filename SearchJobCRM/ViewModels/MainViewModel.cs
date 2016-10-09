@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -84,13 +83,16 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 }
             }
         }
-        public ICommand ShowCommand { get; set; }
+        public ICommand ShowCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
         private readonly DatabaseContext _dbContext;
+        private ErrorViewModel _errors;
+
         public MainViewModel()
         {
             try
             {
+                _errors = new ErrorViewModel();
                 StatusBar = "Готово";
                 _dbContext = new DatabaseContext();
                 _dbContext.SaveChanges();
@@ -107,11 +109,25 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
             }
             catch(Exception ex)
             {
-                Debug.WriteLine(ex);
-                MessageBox.Show(ex.ToString());
+                ex.Show();
             }
         }
-
+        public bool Close()
+        {
+            if (_dbContext.HasUnsavedChanges())
+            {
+                var result = MessageBox.Show("Сохранить изменения?", "Сохранение изменений", MessageBoxButton.YesNoCancel);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Save();
+                        return false;
+                    case MessageBoxResult.No: return false;
+                    default: return true;
+                }
+            }
+            return false;
+        }
         private void Vacancies_CollectionChanged1(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -205,18 +221,30 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
 
         private void Save()
         {
-            _dbContext.SaveChanges();
+            try
+            {
+                //todo: диалоги не сохраняются
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ex.Show();
+            }
         }
         private void Show()
         {
-            //_dbContext.Companies.Add(new Company() { Name = "Test" });
-            //MessageBox.Show("Test");
-            if(SelectedVacancy as Vacancy != null)
+            try
             {
-                var di = new VacancyDetailedViewModel((Vacancy)SelectedVacancy);
-                di.Show();
+                if (SelectedVacancy as Vacancy != null)
+                {
+                    var di = new VacancyDetailedViewModel((Vacancy)SelectedVacancy);
+                    di.Show();
+                }
             }
-
+            catch (Exception ex)
+            {
+                ex.Show();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

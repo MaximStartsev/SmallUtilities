@@ -1,6 +1,8 @@
-﻿using MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels;
+﻿using MaximStartsev.SmallUtilities.SearchJobCRM.Core;
+using MaximStartsev.SmallUtilities.SearchJobCRM.Utilities;
+using MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels;
+using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace MaximStartsev.SmallUtilities.SearchJobCRM
 {
@@ -12,16 +14,12 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM
         public MainWindow()
         {
             InitializeComponent();
+            MVVMCore.MainWindow = this;
             DataContext = new MainViewModel();
         }
-
-        private void CompanyDataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            (sender as DataGrid).CommitEdit();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            e.Cancel = (DataContext as MainViewModel).Close();
 
         }
     }
