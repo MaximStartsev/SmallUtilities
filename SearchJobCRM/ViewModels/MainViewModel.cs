@@ -100,9 +100,14 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 Vacancies.CollectionChanged += Vacancies_CollectionChanged;
                 Companies = new ObservableCollection<Company>(_dbContext.Companies.ToList());
                 Companies.CollectionChanged += Companies_CollectionChanged;
+                _dbContext.Messages.ToList();
                 foreach (var company in Companies)
                 {
                     company.Vacancies.CollectionChanged += Vacancies_CollectionChanged1;
+                }
+                foreach (var vacancy in Vacancies)
+                {
+                    vacancy.Dialog.CollectionChanged += Dialog_CollectionChanged;
                 }
                 ShowCommand = new DelegateCommand(o => Show());
                 SaveCommand = new DelegateCommand(o=>Save());
@@ -112,6 +117,41 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 ex.Show();
             }
         }
+
+        private void Dialog_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if(SelectedVacancy as Vacancy != null)
+                    {
+                        foreach (DialogMessage dialog in e.NewItems)
+                        {
+                            dialog.Vacancy = (Vacancy)SelectedVacancy;
+                            _dbContext.Messages.Add(dialog);
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (DialogMessage dialog in e.OldItems)
+                    {
+                        if (_dbContext.Messages.Contains(dialog))
+                        {
+                            _dbContext.Messages.Remove(dialog);
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public bool Close()
         {
             if (_dbContext.HasUnsavedChanges())

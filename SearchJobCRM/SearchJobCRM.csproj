@@ -91,14 +91,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ActiveRecordBase.cs" />
     <Compile Include="Core\MVVMFactory.cs" />
     <Compile Include="Core\ViewModel.cs" />
-    <Compile Include="FieldAttribute.cs" />
     <Compile Include="Models\Dialog.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Utilities\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Utilities\Configuration.cs" />
     <Compile Include="Models\Vacancy.cs" />
     <Compile Include="ViewModels\VacancyDetailedViewModel.cs" />
     <Compile Include="Views\ErrorView.xaml.cs">
@@ -162,9 +159,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>

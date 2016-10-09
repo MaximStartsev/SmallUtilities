@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
 {
     public abstract class ViewModel
