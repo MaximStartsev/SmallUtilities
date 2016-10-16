@@ -1,4 +1,6 @@
-﻿using MaximStartsev.SmallUtilities.SearchJobCRM.Models;
+﻿using MaximStartsev.SmallUtilities.Common.Errors;
+using MaximStartsev.SmallUtilities.Common.MVVM;
+using MaximStartsev.SmallUtilities.SearchJobCRM.Models;
 using MaximStartsev.SmallUtilities.SearchJobCRM.Utilities;
 using System;
 using System.Collections;

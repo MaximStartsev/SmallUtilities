@@ -1,4 +1,5 @@
-﻿using MaximStartsev.SmallUtilities.SearchJobCRM.Core;
+﻿
+using MaximStartsev.SmallUtilities.Common.MVVM;
 using MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels;
 using System.Windows;
 
@@ -12,12 +13,17 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM
         public MainWindow()
         {
             InitializeComponent();
-            MVVMCore.MainWindow = this;
-            DataContext = new MainViewModel();
+            ViewModelFactory.MainWindow = this;
+
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = (DataContext as MainViewModel).Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MainViewModel();
         }
     }
 }

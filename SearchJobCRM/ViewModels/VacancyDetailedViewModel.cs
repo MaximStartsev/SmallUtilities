@@ -1,4 +1,4 @@
-﻿using MaximStartsev.SmallUtilities.SearchJobCRM.Core;
+﻿using MaximStartsev.SmallUtilities.Common.MVVM;
 using MaximStartsev.SmallUtilities.SearchJobCRM.Models;
 using System;
 

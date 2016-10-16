@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
+namespace MaximStartsev.SmallUtilities.Common.MVVM
 {
-    class DelegateCommand : ICommand
+    public class DelegateCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
         private Action<object> _callback;

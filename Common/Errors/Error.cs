@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MaximStartsev.SmallUtilities.SearchJobCRM.Models
+namespace MaximStartsev.SmallUtilities.Common.Errors
 {
-    class Error
+    public class Error
     {
         public string Message { get; set; }
         public string StackTrace { get; set; }

@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MaximStartsev.SmallUtilities.SearchJobCRM.Views"
+             xmlns:mvvm="clr-namespace:MaximStartsev.SmallUtilities.Common.MVVM;assembly=MaximStartsev.SmallUtilities.Common"
              mc:Ignorable="d"
-             xmlns:utilities="clr-namespace:MaximStartsev.SmallUtilities.SearchJobCRM.Utilities"
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid Background="White">
         <Grid.Resources>
-            <utilities:BooleanToVisibilityConverter x:Key="BoolConverter"/>
+            <mvvm:BooleanToVisibilityConverter x:Key="BoolConverter"/>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

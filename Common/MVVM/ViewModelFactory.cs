@@ -5,9 +5,10 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
+
+namespace MaximStartsev.SmallUtilities.Common.MVVM
 {
-    public static class MVVMCore
+    public static class ViewModelFactory
     {
         public static Window MainWindow { get; set; }
         private readonly static Dictionary<ViewModel, Window> _openedWindows = new Dictionary<ViewModel, Window>();
@@ -19,7 +20,15 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
             {
                 if (_views == null)
                 {
-                    _views = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name.EndsWith("View") && t.IsSubclassOf(typeof(UserControl)));
+                    var views = new List<Type>();
+                    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    foreach (var assembly in assemblies.Where(a=>a.FullName.StartsWith("MaximStartsev.SmallUtilities")))
+                    {
+                        views.AddRange(assembly.GetTypes().Where(t => t.Name.EndsWith("View") && t.IsSubclassOf(typeof(UserControl))));
+                    }
+                    _views = views;
+                    var ex = Assembly.GetEntryAssembly();
+                    //_views = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name.EndsWith("View") && t.IsSubclassOf(typeof(UserControl)));
                 }
                 return _views;
             }

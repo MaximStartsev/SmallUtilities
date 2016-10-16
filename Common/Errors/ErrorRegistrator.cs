@@ -1,9 +1,8 @@
-﻿using MaximStartsev.SmallUtilities.SearchJobCRM.Models;
-using System;
+﻿using System;
 
-namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
+namespace MaximStartsev.SmallUtilities.Common.Errors
 {
-    class RegisteredErrorArgs : EventArgs
+    public class RegisteredErrorArgs : EventArgs
     {
         public Error Error { get; private set; }
         public RegisteredErrorArgs(Error error)
@@ -14,7 +13,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
     /// <summary>
     /// Класс для регистрации ошибок
     /// </summary>
-    static class ErrorRegistrator
+    public static class ErrorRegistrator
     {
         public static event EventHandler<RegisteredErrorArgs> RegisteredError;
 

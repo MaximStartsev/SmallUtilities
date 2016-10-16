@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:utilities="clr-namespace:MaximStartsev.SmallUtilities.SearchJobCRM.Utilities"
+        xmlns:mvvm="clr-namespace:MaximStartsev.SmallUtilities.Common.MVVM;assembly=MaximStartsev.SmallUtilities.Common"
         mc:Ignorable="d" WindowState="Maximized" Closing="Window_Closing"
-        Title="Search Job CRM" Height="400" Width="800" >
+        Title="Search Job CRM" Height="400" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.Resources>
-            <utilities:BooleanToVisibilityConverter x:Key="BoolConverter"/>
+            <mvvm:BooleanToVisibilityConverter x:Key="BoolConverter"/>
         </Grid.Resources>
 
         <Grid.RowDefinitions>

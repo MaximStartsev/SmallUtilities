@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowMovier", "WindowMovier\WindowMovier.csproj", "{F35512B8-EB02-45B4-89E5-24B8DD42D5A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchJobCRM", "SearchJobCRM\SearchJobCRM.csproj", "{78B75BCB-61CC-48FE-973D-A6D29CD76F75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodSelector", "FoodSelector\FoodSelector.csproj", "{46F36B4F-34AF-4157-94B7-2558CAF53224}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5D4D2F08-F426-43F1-8831-82BA418231B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F36B4F-34AF-4157-94B7-2558CAF53224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F36B4F-34AF-4157-94B7-2558CAF53224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F36B4F-34AF-4157-94B7-2558CAF53224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F36B4F-34AF-4157-94B7-2558CAF53224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

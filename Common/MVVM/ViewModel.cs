@@ -1,5 +1,5 @@
 ﻿
-namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
+namespace MaximStartsev.SmallUtilities.Common.MVVM
 {
     public abstract class ViewModel
     {
@@ -11,12 +11,12 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
         {
             if (!IsOpened)
             {
-                MVVMCore.Show(this);
+                ViewModelFactory.Show(this);
                 IsOpened = true;
             }
             else
             {
-                MVVMCore.Activate(this);
+                ViewModelFactory.Activate(this);
             }
         }
         public virtual void Hide()
@@ -24,7 +24,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.Core
             if (IsOpened)
             {
                 IsOpened = false;
-                MVVMCore.Hide(this);
+                ViewModelFactory.Hide(this);
             }
         }
     }

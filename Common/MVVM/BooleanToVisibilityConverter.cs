@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MaximStartsev.SmallUtilities.SearchJobCRM.Utilities
+namespace MaximStartsev.SmallUtilities.Common.MVVM
 {
-    class BooleanToVisibilityConverter : IValueConverter
+    public class BooleanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
