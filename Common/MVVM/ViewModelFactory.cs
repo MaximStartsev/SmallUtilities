@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace MaximStartsev.SmallUtilities.Common.MVVM
 {
     public static class ViewModelFactory
@@ -20,15 +19,8 @@ namespace MaximStartsev.SmallUtilities.Common.MVVM
             {
                 if (_views == null)
                 {
-                    var views = new List<Type>();
                     var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                    foreach (var assembly in assemblies.Where(a=>a.FullName.StartsWith("MaximStartsev.SmallUtilities")))
-                    {
-                        views.AddRange(assembly.GetTypes().Where(t => t.Name.EndsWith("View") && t.IsSubclassOf(typeof(UserControl))));
-                    }
-                    _views = views;
-                    var ex = Assembly.GetEntryAssembly();
-                    //_views = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name.EndsWith("View") && t.IsSubclassOf(typeof(UserControl)));
+                    _views = Assembly.GetEntryAssembly().GetTypes().Where(t => t.Name.EndsWith("View") && t.IsSubclassOf(typeof(UserControl)));
                 }
                 return _views;
             }
