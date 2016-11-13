@@ -4,6 +4,11 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.Models
 {
     class Dish
     {
+        public Dish()
+        {
+            Ingredient = new List<Ingredient>();
+            Tags = new List<Tag>();
+        }
         public int Id { get; set; }
         public DishType Type { get; set; }
         public string Title { get; set; }
@@ -13,5 +18,9 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.Models
         public int Count { get; set; }
         public List<Ingredient> Ingredient { get; set; }
         public List<Tag> Tags { get; set; }
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

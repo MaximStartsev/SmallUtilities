@@ -19,5 +19,10 @@ namespace MaximStartsev.SmallUtilities.FoodSelector
         {
             DataContext = new MainViewModel();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            (DataContext as MainViewModel).Close();
+        }
     }
 }
