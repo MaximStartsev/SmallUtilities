@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Errors\Error.cs" />
     <Compile Include="Errors\ErrorRegistrator.cs" />
+    <Compile Include="LazyObservableCollection.cs" />
     <Compile Include="MVVM\BooleanToVisibilityConverter.cs" />
     <Compile Include="MVVM\DelegateCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />

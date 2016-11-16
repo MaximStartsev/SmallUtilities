@@ -16,9 +16,23 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
         public ObservableCollection<Tag> Tags { get; private set; }
         public ObservableCollection<Ingredient> Ingredients { get; private set; }
         private DatabaseContext _dbContext;
-        public Dish SelectedDish { get; private set; }
+        private Dish _selectedDish;
+        public Dish SelectedDish
+        {
+            get { return _selectedDish; }
+            set
+            {
+                if(_selectedDish != value)
+                {
+                    _selectedDish = value;
+                    InvokePropertyChanged(nameof(SelectedDish));
+                }
+            }
+        }
+        public string TagName { get; set; }
         public DishCreatorViewModel DishCreator { get; private set; }
         public ICommand RandomDishCommand { get; private set; }
+        public ICommand RemoveDishCommand { get; private set; }
         public MainViewModel()
         {
             try
@@ -31,6 +45,7 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
                 Ingredients = _dbContext.IngredientsCollection;
                 DishCreator = new DishCreatorViewModel(Dishes, Tags, Ingredients);
                 RandomDishCommand = new DelegateCommand(o => RandomDish());
+                RemoveDishCommand = new DelegateCommand(o => RemoveDish(o as Dish));
             }
             catch (Exception ex)
             {
@@ -38,6 +53,13 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             }
         }
 
+        private void RemoveDish(Dish dish)
+        {
+            if (dish != null)
+            {
+                Dishes.Remove(dish);
+            }
+        }
         public void Close()
         {
             _dbContext.SaveChanges();
@@ -48,7 +70,7 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             int value = 0;
             var maxCount = Dishes.Max(d => d.Count) + 1;
             var rand = new Random();
-            foreach (var dish in Dishes)
+            foreach (var dish in Dishes.Where(d=>String.IsNullOrEmpty(TagName) || d.Tags.Any(t=>t.Name == TagName)))
             {
                 var newValue = rand.Next(1, maxCount - dish.Count);
                 if(newValue > value)

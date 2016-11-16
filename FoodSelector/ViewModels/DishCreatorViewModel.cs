@@ -1,4 +1,5 @@
-﻿using MaximStartsev.SmallUtilities.Common.MVVM;
+﻿using MaximStartsev.SmallUtilities.Common;
+using MaximStartsev.SmallUtilities.Common.MVVM;
 using MaximStartsev.SmallUtilities.FoodSelector.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -29,17 +30,17 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             }
         }
 
-        public DishType Type
-        {
-            get { return _currentDish.Type; }
-            set
-            {
-                if(_currentDish.Type != value)
-                {
-                    _currentDish.Type = value;
-                }
-            }
-        }
+        //public DishType Type
+        //{
+        //    get { return _currentDish.Type; }
+        //    set
+        //    {
+        //        if(_currentDish.Type != value)
+        //        {
+        //            _currentDish.Type = value;
+        //        }
+        //    }
+        //}
 
         public ObservableCollection<Ingredient> Ingredients { get; private set; }
 
@@ -74,7 +75,8 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
         public ICommand AddIngredientCommand { get; private set; }
         public ICommand AddTagCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
-
+        public ICommand RemoveIngredientCommand { get; private set; }
+        public ICommand RemoveTagCommand { get; private set; }
 
         public DishCreatorViewModel(ObservableCollection<Dish> dishesCollection, ObservableCollection<Tag> tags, ObservableCollection<Ingredient> ingredients)
         {
@@ -85,11 +87,24 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             AddIngredientCommand = new DelegateCommand(o => AddIngredient());
             AddTagCommand = new DelegateCommand(o => AddTag());
             SaveCommand = new DelegateCommand(o=>Save());
-            Tags = new ObservableCollection<Tag>(_currentDish.Tags);
-            Ingredients = new ObservableCollection<Ingredient>(_currentDish.Ingredient);
+            RemoveIngredientCommand = new DelegateCommand(o=>RemoveIngredient(o as Ingredient));
+            RemoveTagCommand = new DelegateCommand(o=>RemoveTag(o as Tag));
+            Tags = new LazyObservableCollection<Tag>(_currentDish.Tags);
+            Ingredients = new LazyObservableCollection<Ingredient>(_currentDish.Ingredients);
+        }
+        private void RemoveIngredient(Ingredient ingredient)
+        {
+            if(ingredient != null)
+                Ingredients.Remove(ingredient);
+        }
+        private void RemoveTag(Tag tag)
+        {
+            if(tag != null)
+                Tags.Remove(tag);
         }
         private void AddIngredient()
         {
+            if (String.IsNullOrWhiteSpace(NewIngredient)) return;
             if (!AllIngredients.Any(i => i.Name == NewIngredient))
             {
                 AllIngredients.Add(new Ingredient { Name = NewIngredient });
@@ -99,6 +114,7 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
         }
         private void AddTag()
         {
+            if (String.IsNullOrWhiteSpace(NewTag)) return;
             if(!AllTags.Any(t=>t.Name == NewTag))
             {
                 AllTags.Add(new Tag() { Name = NewTag });
@@ -116,8 +132,8 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             {
                 _dishesCollection.Add(_currentDish);
                 _currentDish = new Dish();
-                Tags = new ObservableCollection<Tag>(_currentDish.Tags);
-                Ingredients = new ObservableCollection<Ingredient>(_currentDish.Ingredient);
+                Tags = new LazyObservableCollection<Tag>(_currentDish.Tags);
+                Ingredients = new LazyObservableCollection<Ingredient>(_currentDish.Ingredients);
                 InvokePropertyChanged(nameof(Title));
                 InvokePropertyChanged(nameof(Type));
                 NewIngredient = String.Empty;
@@ -126,6 +142,7 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
                 InvokePropertyChanged(nameof(Tags));
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void InvokePropertyChanged(string property)
         {

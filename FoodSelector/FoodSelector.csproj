@@ -87,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Dish.cs" />
-    <Compile Include="Models\DishType.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

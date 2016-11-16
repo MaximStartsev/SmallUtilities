@@ -11,104 +11,125 @@
         Title="Выбиратель блюд" Height="400" Width="600" WindowState="Maximized" Closing="Window_Closing">
     <Grid>
         <Grid.Resources>
-            <ObjectDataProvider x:Key="DishTypeEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <!--<ObjectDataProvider x:Key="DishTypeEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="models:DishType" />
                 </ObjectDataProvider.MethodParameters>
-            </ObjectDataProvider>
+            </ObjectDataProvider>-->
             <mvvm:BooleanToVisibilityConverter x:Key="BoolConverter"/>
             <ControlTemplate x:Key="ListTemplate" TargetType="ItemsControl">
                 <ListBox />
             </ControlTemplate>
-            <DataTemplate x:Key="ListItemTemplate">
-                <Grid>
+            <DataTemplate x:Key="IngredientTemplate">
+                <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{Binding}" />
-                    <Button Width="20" Height="20" Content="X" Grid.Column="1" />
-
-
+                    <TextBlock x:Name="Parameter" Grid.Column="0" Text="{Binding}" Margin="2,0" TextWrapping="Wrap"
+                               VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                    <Button Width="20" Height="20" Content="X" Grid.Column="1" Margin="4,0" HorizontalAlignment="Right"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor,
+AncestorType={x:Type Window}}, Path=DataContext.DishCreator.RemoveIngredientCommand}" CommandParameter="{Binding}"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="TagTemplate">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="Parameter" Grid.Column="0" Text="{Binding}" Margin="2,0" TextWrapping="Wrap"
+                               VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                    <Button Width="20" Height="20" Content="X" Grid.Column="1" Margin="4,0" HorizontalAlignment="Right"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor,
+AncestorType={x:Type Window}}, Path=DataContext.DishCreator.RemoveTagCommand}" CommandParameter="{Binding}"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="DishTemplate">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="Parameter" Grid.Column="0" Text="{Binding}" Margin="2,0" TextWrapping="Wrap"
+                               VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                    <Button Width="20" Height="20" Content="X" Grid.Column="1" Margin="4,0" HorizontalAlignment="Right"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor,
+AncestorType={x:Type Window}}, Path=DataContext.RemoveDishCommand}" CommandParameter="{Binding}"/>
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
-        <TabControl>
-            <TabItem Header="Блюда">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition  />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition  Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <!--row 1-->
-                    <Button Content="Случайное блюдо" Margin="4" Padding="10,2" VerticalAlignment="Top"
+        <Grid Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!--row 1-->
+            <StackPanel Grid.Row="1">
+                <ComboBox ItemsSource="{Binding Tags}" Margin="4" IsEditable="True" Text="{Binding TagName, Mode=TwoWay}" />
+                <Button Content="Случайное блюдо" Margin="4" Padding="10,2" VerticalAlignment="Top"
                             Command="{Binding RandomDishCommand}"/>
-                    <StackPanel Grid.Row="1">
-                        <TextBlock Text="{Binding SelectedDish.Title}" FontWeight="Bold" />
-                        <TextBlock Text="{Binding SelectedDish.Type, StringFormat='Тип: {0}'}" />
-                        <ListBox ItemsSource="{Binding SelectedDish.Ingredient}"/>
-                        <ItemsControl ItemsSource="{Binding SelectedDish.Tags}">
-                            <ItemsControl.Template>
-                                <ControlTemplate TargetType="ItemsControl">
-                                    <WrapPanel />
-                                </ControlTemplate>
-                            </ItemsControl.Template>
-                        </ItemsControl>
-                    </StackPanel>
-                    <!--row 2-->
-                    <GridSplitter Width="2" Grid.RowSpan="2"/>
-                    <ListBox ItemsSource="{Binding Dishes}" Grid.Column="1" Grid.RowSpan="2" />
-                    <!--row 3-->
-                    <GridSplitter Grid.Column="1" Width="2" Grid.RowSpan="2" />
-                    <Grid Grid.Column="2" Grid.RowSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions >
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition />
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition />
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Добавление нового блюда" Margin="2" Grid.ColumnSpan="3" />
-                        <TextBox Text="{Binding DishCreator.Title}" Margin="2" Grid.Row="1" Grid.ColumnSpan="3" />
-                        <ComboBox ItemsSource="{Binding Source={StaticResource DishTypeEnum}}" SelectedItem="{Binding DishCreator.Type}"
-                                  Margin="2" Grid.Row="2" Grid.ColumnSpan="3" />
-                        <TextBlock Text="Ингридиенты:"  Grid.Row="3" Margin="2" VerticalAlignment="Center"/>
-                        <ComboBox Text="{Binding DishCreator.NewIngredient}" Margin="2" Grid.Row="3" Grid.Column="1"
-                                  IsEditable="True" ItemsSource="{Binding DishCreator.AllIngredients}"/>
-                        <Button Content="+" HorizontalAlignment="Right" Margin="2" Width="22" Grid.Column="2" Grid.Row="3"
+                <TextBlock Text="{Binding SelectedDish.Title}" FontWeight="Bold" />
+                <TextBlock Text="Ингридиенты:" />
+                <ListBox ItemsSource="{Binding SelectedDish.Ingredients}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <TextBlock Text="Теги:" />
+                <ListBox ItemsSource="{Binding SelectedDish.Tags}" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+            <!--row 2-->
+            <GridSplitter Width="2" Grid.RowSpan="2"/>
+            <ListBox ItemsSource="{Binding Dishes}" Grid.Column="1" Grid.RowSpan="2" SelectedItem="{Binding SelectedDish, Mode=TwoWay}"
+                              ItemTemplate="{StaticResource DishTemplate}" HorizontalContentAlignment="Stretch"/>
+            <!--row 3-->
+            <GridSplitter Grid.Column="1" Width="2" Grid.RowSpan="2" />
+            <Grid Grid.Column="2" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Добавление нового блюда" Margin="2" Grid.ColumnSpan="3" />
+                <TextBox Text="{Binding DishCreator.Title}" Margin="2" Grid.Row="1" Grid.ColumnSpan="3" />
+                <TextBlock Text="Ингридиенты:"  Grid.Row="3" Margin="2" VerticalAlignment="Center"/>
+                <ComboBox Text="{Binding DishCreator.NewIngredient}" Margin="2" Grid.Row="3" Grid.Column="1"
+                                  IsEditable="True" ItemsSource="{Binding DishCreator.AllIngredients}">
+                    <ComboBox.InputBindings>
+                        <KeyBinding Command="{Binding DishCreator.AddIngredientCommand}" Key="Return" />
+                    </ComboBox.InputBindings>
+                </ComboBox>
+                <Button Content="+" HorizontalAlignment="Right" Margin="2" Width="22" Grid.Column="2" Grid.Row="3"
                                 Command="{Binding DishCreator.AddIngredientCommand}"/>
-                        <ListBox ItemsSource="{Binding DishCreator.Ingredients}" Margin="2" Grid.Row="4" Grid.ColumnSpan="3"/>
-                        <TextBlock Text="Теги:" Grid.Row="5" Margin="2" VerticalAlignment="Center"/>
-                        <ComboBox Text="{Binding DishCreator.NewTag, Mode=TwoWay}" Margin="2" Grid.Row="5" Grid.Column="1"
-                                 IsEditable="True" ItemsSource="{Binding DishCreator.AllTags}" />
-                        <Button Content="+" HorizontalAlignment="Right" Margin="2" Width="22" Grid.Column="2" Grid.Row="5"
+                <ListBox ItemsSource="{Binding DishCreator.Ingredients}" Margin="2" Grid.Row="4" Grid.ColumnSpan="3"
+                                 ItemTemplate="{StaticResource IngredientTemplate}" HorizontalContentAlignment="Stretch"/>
+                <TextBlock Text="Теги:" Grid.Row="5" Margin="2" VerticalAlignment="Center"/>
+                <ComboBox Text="{Binding DishCreator.NewTag, Mode=TwoWay}" Margin="2" Grid.Row="5" Grid.Column="1"
+                                 IsEditable="True" ItemsSource="{Binding DishCreator.AllTags}" >
+                    <ComboBox.InputBindings>
+                        <KeyBinding Command="{Binding DishCreator.AddTagCommand}"  Key="Return" />
+                    </ComboBox.InputBindings>
+                </ComboBox>
+                <Button Content="+" HorizontalAlignment="Right" Margin="2" Width="22" Grid.Column="2" Grid.Row="5"
                                 Command="{Binding DishCreator.AddTagCommand}"/>
-                        <ListBox ItemsSource="{Binding DishCreator.Tags}" Margin="2" Grid.Row="6" Grid.ColumnSpan="3"/>
-                        <!--<ItemsControl ItemsSource="{Binding DishCreator.Tags}" Margin="2" Grid.Row="6" Grid.ColumnSpan="3"
-                                      Template="{StaticResource ListTemplate}" ItemTemplate="{StaticResource ListItemTemplate}"/>-->
-
-
-                        <Button Content="Save" Grid.Row="7" Grid.ColumnSpan="3" Margin="2" Command="{Binding DishCreator.SaveCommand}"
+                <ListBox ItemsSource="{Binding DishCreator.Tags}" Margin="2" Grid.Row="6" Grid.ColumnSpan="3"
+                                 ItemTemplate="{StaticResource TagTemplate}" HorizontalContentAlignment="Stretch"/>
+                <Button Content="Save" Grid.Row="7" Grid.ColumnSpan="3" Margin="2" Command="{Binding DishCreator.SaveCommand}"
                                 IsEnabled="{Binding DishCreator.IsCanSave}" />
-                    </Grid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Ингридиенты">
-                <ListBox ItemsSource="{Binding Ingredients}" />
-            </TabItem>
-        </TabControl>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
