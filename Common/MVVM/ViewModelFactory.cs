@@ -48,7 +48,7 @@ namespace MaximStartsev.SmallUtilities.Common.MVVM
             var view = Views.FirstOrDefault(v => v.Name == viewName);
             if (view == null)
             {
-                throw new Exception(String.Format("Не удалось найти представление для модели представления {0}", name));
+                throw new Exception(String.Format("Не удалось найти представление для модели представления {0}. Список зарегистрированных представлений:", name, String.Join(Environment.NewLine, Views.Select(v => v.Name))));
             }
             var control = (UserControl)Activator.CreateInstance(view);
             var window = new Window();
