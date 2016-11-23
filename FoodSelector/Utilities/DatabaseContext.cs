@@ -18,14 +18,18 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.Utilities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) { }
 
+        public DatabaseContext()
+        {
+            Configuration.LazyLoadingEnabled = false;
+        }
         public void Load()
         {
-            DishesCollection = new ObservableCollection<Dish>(Dishes.ToList());
-            DishesCollection.CollectionChanged += DishesCollection_CollectionChanged;
             TagsCollection = new ObservableCollection<Tag>(Tags.ToList());
             TagsCollection.CollectionChanged += TagsCollection_CollectionChanged;
             IngredientsCollection = new ObservableCollection<Ingredient>(Ingredients.ToList());
             IngredientsCollection.CollectionChanged += IngredientsCollection_CollectionChanged;
+            DishesCollection = new ObservableCollection<Dish>(Dishes.Include(d=>d.Tags).Include(d=>d.Ingredients).ToList());
+            DishesCollection.CollectionChanged += DishesCollection_CollectionChanged;
         }
 
         private void IngredientsCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

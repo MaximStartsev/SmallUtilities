@@ -30,18 +30,6 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             }
         }
 
-        //public DishType Type
-        //{
-        //    get { return _currentDish.Type; }
-        //    set
-        //    {
-        //        if(_currentDish.Type != value)
-        //        {
-        //            _currentDish.Type = value;
-        //        }
-        //    }
-        //}
-
         public ObservableCollection<Ingredient> Ingredients { get; private set; }
 
         public ObservableCollection<Tag> Tags { get; private set; }
@@ -130,12 +118,19 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
             }
             else
             {
+                if (!String.IsNullOrEmpty(NewTag))
+                {
+                    AddTag();
+                }
+                if (!String.IsNullOrEmpty(NewIngredient))
+                {
+                    AddIngredient();
+                }
                 _dishesCollection.Add(_currentDish);
                 _currentDish = new Dish();
                 Tags = new LazyObservableCollection<Tag>(_currentDish.Tags);
                 Ingredients = new LazyObservableCollection<Ingredient>(_currentDish.Ingredients);
                 InvokePropertyChanged(nameof(Title));
-                InvokePropertyChanged(nameof(Type));
                 NewIngredient = String.Empty;
                 InvokePropertyChanged(nameof(Ingredients));
                 NewTag = String.Empty;
