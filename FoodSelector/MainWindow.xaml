@@ -104,7 +104,7 @@ AncestorType={x:Type Window}}, Path=DataContext.RemoveDishCommand}" CommandParam
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Добавление нового блюда" Margin="2" Grid.ColumnSpan="3" />
-                <TextBox Text="{Binding DishCreator.Title}" Margin="2" Grid.Row="1" Grid.ColumnSpan="3" />
+                <TextBox x:Name="NewDishName" Text="{Binding DishCreator.Title}" Margin="2" Grid.Row="1" Grid.ColumnSpan="3" />
                 <TextBlock Text="Ингридиенты:"  Grid.Row="3" Margin="2" VerticalAlignment="Center"/>
                 <ComboBox Text="{Binding DishCreator.NewIngredient}" Margin="2" Grid.Row="3" Grid.Column="1"
                                   IsEditable="True" ItemsSource="{Binding DishCreator.AllIngredients}">
@@ -127,8 +127,17 @@ AncestorType={x:Type Window}}, Path=DataContext.RemoveDishCommand}" CommandParam
                                 Command="{Binding DishCreator.AddTagCommand}"/>
                 <ListBox ItemsSource="{Binding DishCreator.Tags}" Margin="2" Grid.Row="6" Grid.ColumnSpan="3"
                                  ItemTemplate="{StaticResource TagTemplate}" HorizontalContentAlignment="Stretch"/>
-                <Button Content="Save" Grid.Row="7" Grid.ColumnSpan="3" Margin="2" Command="{Binding DishCreator.SaveCommand}"
-                                IsEnabled="{Binding DishCreator.IsCanSave}" />
+                <Button Content="Save" Grid.Row="7" Grid.ColumnSpan="3" Margin="2" Command="{Binding DishCreator.SaveCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=NewDishName}" Value="">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
         </Grid>
     </Grid>

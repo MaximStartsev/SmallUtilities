@@ -135,6 +135,7 @@ namespace MaximStartsev.SmallUtilities.FoodSelector.ViewModels
                 InvokePropertyChanged(nameof(Ingredients));
                 NewTag = String.Empty;
                 InvokePropertyChanged(nameof(Tags));
+                InvokePropertyChanged(nameof(IsCanSave));
             }
         }
 
