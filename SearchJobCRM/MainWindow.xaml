@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mvvm="clr-namespace:MaximStartsev.SmallUtilities.Common.MVVM;assembly=MaximStartsev.SmallUtilities.Common"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:vm="clr-namespace:MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels"
         mc:Ignorable="d" WindowState="Maximized" Closing="Window_Closing"
         Title="Search Job CRM" Height="400" Width="800" Loaded="Window_Loaded">
     <Grid>
@@ -92,8 +94,13 @@
         </TabControl>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" >
             <Button Content="Сохранить" Margin="2,0" Padding="4,2" Command="{Binding SaveCommand}"/>
-            <Button Content="О вакансии" Margin="2,0" Padding="4,2" Command="{Binding ShowCommand}"
-                    Visibility="{Binding Path=VacancySelected, Converter={StaticResource BoolConverter}}"/>
+            <!--<Button Content="О вакансии" Margin="2,0" Padding="4,2" Command="{Binding ShowCommand}"
+                    Visibility="{Binding Path=VacancySelected, Converter={StaticResource BoolConverter}}"/>-->
+            <Button Content="О вакансии" Margin="2,0" Padding="4,2"
+                    Command="{mvvm:ShowViewModelBinding {x:Type vm:VacancyDetailedViewModel}}"
+                    Visibility="{Binding Path=VacancySelected, Converter={StaticResource BoolConverter}}"
+                    CommandParameter="{Binding SelectedVacancy}">
+            </Button>
         </StackPanel>
         <StatusBar Grid.Row="1" Height="24">
             <TextBlock Text="{Binding StatusBar}"/>

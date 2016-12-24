@@ -85,7 +85,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 }
             }
         }
-        public ICommand ShowCommand { get; private set; }
+        //public ICommand ShowCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
         private readonly DatabaseContext _dbContext;
         private ErrorViewModel _errors;
@@ -111,7 +111,7 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 {
                     vacancy.Dialog.CollectionChanged += Dialog_CollectionChanged;
                 }
-                ShowCommand = new DelegateCommand(o => Show());
+                //ShowCommand = new DelegateCommand(o => Show());
                 SaveCommand = new DelegateCommand(o=>Save());
             }
             catch(Exception ex)
@@ -273,21 +273,21 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
                 ex.Show();
             }
         }
-        private void Show()
-        {
-            try
-            {
-                if (SelectedVacancy as Vacancy != null)
-                {
-                    var di = new VacancyDetailedViewModel((Vacancy)SelectedVacancy);
-                    di.Show();
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Show();
-            }
-        }
+        //private void Show()
+        //{
+        //    try
+        //    {
+        //        if (SelectedVacancy as Vacancy != null)
+        //        {
+        //            var di = new VacancyDetailedViewModel((Vacancy)SelectedVacancy);
+        //            di.Show();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ex.Show();
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void InvokePropertyChanged(string property)
