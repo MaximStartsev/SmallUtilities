@@ -16,20 +16,20 @@ namespace MangaCompiler
                     Console.WriteLine("Продолжение невозможно. Для работы программы необходимо передать два параметра. Первый - путь к директории с архивами. Второй - имя выходного файла.");
                     return;
                 }
-
-                Console.WriteLine("Поиск файлов...");
-                var files = GetFiles(args[0]);
+                var fullpath = Path.GetFullPath(args[0]);
+                Console.WriteLine(String.Format("Поиск файлов в {0}...", fullpath));
+                var files = GetFiles(fullpath);
                 var destination = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
                 Directory.CreateDirectory(destination);
 
                 Console.WriteLine("Распаковка архивов...");
                 foreach(var file in files.Where(f=>f.EndsWith(".rar") || f.EndsWith(".zip")))
                 {
-                    Archivator.ExtractArchive(file, destination);
+                    Archivator.ExtractArchive(file, Path.Combine(destination, Path.GetFileNameWithoutExtension(file)));
                 }
 
-                Console.WriteLine("Создание pdf файла...");
-                var tempFiles = GetFiles(destination);
+                Console.WriteLine(String.Format("Создание pdf файла {0}...", args[1]));
+                var tempFiles = GetFiles(destination).Where(f=>f.EndsWith(".jpg") || f.EndsWith(".png"));
                 PdfCreator.Create(tempFiles, args[1]);
 
                 Console.WriteLine("Удаление временных файлов...");
