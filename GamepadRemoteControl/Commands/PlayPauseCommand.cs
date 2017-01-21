@@ -1,9 +1,11 @@
-﻿using MaximStartsev.GamePadRemoteController;
+﻿using MaximStartsev.GamepadRemoteControl.Meta;
+using MaximStartsev.GamePadRemoteController;
 using System;
 using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
+    [Alias(Title = "playpause")]
     internal sealed class PlayPauseCommand : ICommand
     {
         private Action _action;

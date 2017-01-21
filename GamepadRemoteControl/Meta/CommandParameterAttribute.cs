@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MaximStartsev.GamepadRemoteControl.Configuration
+namespace MaximStartsev.GamepadRemoteControl.Meta
 {
     [AttributeUsage(AttributeTargets.Property)]
     class CommandParameterAttribute:Attribute

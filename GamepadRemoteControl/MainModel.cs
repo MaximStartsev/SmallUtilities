@@ -31,7 +31,7 @@ namespace MaximStartsev.GamepadRemoteControl
 
         public MainModel()
         {
-            Commands = Assembly.GetEntryAssembly().GetTypes().Where(t => t.IsAssignableFrom(typeof(ICommand)) && t.Name != nameof(ICommand)).ToList();
+            Commands = Assembly.GetEntryAssembly().GetTypes().Where(t => typeof(ICommand).IsAssignableFrom(t) && t.Name != nameof(ICommand) && t.Name != nameof(IStickCommand)).ToList();
             Load();
         }
         private void Load()

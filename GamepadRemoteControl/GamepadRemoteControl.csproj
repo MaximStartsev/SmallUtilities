@@ -53,7 +53,8 @@
     <Compile Include="Commands\RunProgramCommand.cs" />
     <Compile Include="Commands\VolumeDownCommand.cs" />
     <Compile Include="Commands\VolumeUpCommand.cs" />
-    <Compile Include="Configuration\CommandParameterAttribute.cs" />
+    <Compile Include="Meta\AliasAttribute.cs" />
+    <Compile Include="Meta\CommandParameterAttribute.cs" />
     <Compile Include="InteropHelper.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="MainModel.cs" />

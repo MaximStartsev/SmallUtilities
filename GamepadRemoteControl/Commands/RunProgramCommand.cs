@@ -1,10 +1,11 @@
-﻿using MaximStartsev.GamepadRemoteControl.Configuration;
+﻿using MaximStartsev.GamepadRemoteControl.Meta;
 using System;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
+    [Alias(Title = "runprogram")]
     internal sealed class RunProgramCommand : ICommand
     {
         [CommandParameter]
