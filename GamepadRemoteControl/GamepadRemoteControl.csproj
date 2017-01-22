@@ -59,6 +59,9 @@
     <Compile Include="MainController.cs" />
     <Compile Include="MainModel.cs" />
     <Compile Include="MainView.cs" />
+    <Compile Include="MVC\SetCommand\SetCommandController.cs" />
+    <Compile Include="MVC\SetCommand\SetCommandModel.cs" />
+    <Compile Include="MVC\SetCommand\SetCommandView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -27,7 +27,9 @@ namespace MaximStartsev.GamepadRemoteControl
         }
         public void ShowError(Exception ex)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(ex.ToString());
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
         #region set-command
         public void ShowButtons(IEnumerable<string> buttons)
@@ -47,6 +49,10 @@ namespace MaximStartsev.GamepadRemoteControl
             {
                 Console.WriteLine(String.Format("{0}. {1}", ++counter, command));
             }
+        }
+        public void SetCommandComplete()
+        {
+            Console.WriteLine("Готово");
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Commands;
+using MaximStartsev.GamepadRemoteControl.MVC.SetCommand;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -80,48 +81,12 @@ namespace MaximStartsev.GamepadRemoteControl
         #region set command
         private void SetCommand(IEnumerable<string> commandParameters)
         {
-            if (commandParameters.Count() >= 1)
-            {
-                var buttonName = commandParameters.First().ToLower();
-                var buttonProp = _mainModel.GetType().GetProperties().FirstOrDefault(prop=>prop.Name.ToLower() == buttonName);
-                if(buttonProp == null)
-                {
-                    _mainView.ShowError(new Exception(String.Format("Не удалось найти свойство '{0}'.", commandParameters.First())));
-                    return;
-                }
-                if(commandParameters.Count() >= 2)
-                {
-                    var commandName = commandParameters.ElementAt(1).ToLower();
-                    var commandType = _mainModel.Commands.FirstOrDefault(t =>
-                    {
-                        if (t.Name == commandName) return true;
-                        var attribute = t.CustomAttributes.FirstOrDefault();
-                        if (attribute != null)
-                        {
-                            var value = attribute.NamedArguments[0].TypedValue.Value as String;
-                            if (value == commandName) return true;
-                        }
-                        return false;
-                    });
-                    if(commandType == null)
-                    {
-                        _mainView.ShowError(new Exception(String.Format("Не удалось найти команду '{0}'", commandParameters.ElementAt(1))));
-                        return;
-                    }
-                    SetCommand(buttonProp, commandType);
-                }
-            }
-            else
-            {
-                var buttons = _mainModel.GetType().GetProperties().Where(t => typeof(ICommand).IsAssignableFrom(t.PropertyType)).Select(b => b.Name);
-                _mainView.ShowButtons(buttons);
-                var button = Console.ReadLine();
-            }
+            new SetCommandController(_mainModel.GetType().GetProperties().Where(p=>p.PropertyType.IsAssignableFrom(typeof(ICommand))),
+                _mainModel.Commands,
+                (property, commandType) => property.SetValue(_mainModel, Activator.CreateInstance(commandType)))
+                    .Run(commandParameters);
         }
-        private void SetCommand(PropertyInfo property, Type commandType)
-        {
 
-        }
         #endregion
     }
 }
