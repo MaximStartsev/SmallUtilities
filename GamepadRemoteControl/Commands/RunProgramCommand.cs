@@ -6,17 +6,17 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "runprogram")]
-    internal sealed class RunProgramCommand : ICommand
+    public sealed class RunProgramCommand : Command
     {
         [CommandParameter]
         private string ExeFile { get; set; }
         [XmlIgnore]
         private Action _action;
-        public Action Action
+        public override Action Action
         {
             get
             {
-                if (_action != null)
+                if (_action == null)
                 {
                     _action = new Action(() =>
                     {
@@ -27,7 +27,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
             }
         }
         [XmlIgnore]
-        public string Title
+        public override string Title
         {
             get
             {

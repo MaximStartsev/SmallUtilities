@@ -39,6 +39,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\IStickCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\SendKeyboardKeyCommand.cs" />
+    <Compile Include="Commands\StickCommand.cs" />
     <Compile Include="Commands\PlayPauseCommand.cs" />
     <Compile Include="Commands\RunProgramCommand.cs" />
     <Compile Include="Commands\VolumeDownCommand.cs" />
@@ -56,14 +58,30 @@
     <Compile Include="Meta\AliasAttribute.cs" />
     <Compile Include="Meta\CommandParameterAttribute.cs" />
     <Compile Include="InteropHelper.cs" />
-    <Compile Include="MainController.cs" />
-    <Compile Include="MainModel.cs" />
-    <Compile Include="MainView.cs" />
+    <Compile Include="MVC\Main\MainController.cs" />
+    <Compile Include="MVC\Main\MainModel.cs" />
+    <Compile Include="MVC\Main\MainModelSerializer.cs" />
+    <Compile Include="MVC\Main\MainView.cs" />
     <Compile Include="MVC\SetCommand\SetCommandController.cs" />
     <Compile Include="MVC\SetCommand\SetCommandModel.cs" />
     <Compile Include="MVC\SetCommand\SetCommandView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XBox\XBoxController.cs" />
+    <Compile Include="XBox\ControllerStateChangedEventArgs.cs" />
+    <Compile Include="XInput\BatteryInformation.cs" />
+    <Compile Include="XInput\Capabilities.cs" />
+    <Compile Include="XInput\Constants\BatteryDeviceType.cs" />
+    <Compile Include="XInput\Constants\BatteryLevel.cs" />
+    <Compile Include="XInput\Constants\BatteryTypes.cs" />
+    <Compile Include="XInput\Constants\ButtonFlags.cs" />
+    <Compile Include="XInput\Constants\Constants.cs" />
+    <Compile Include="XInput\Gamepad.cs" />
+    <Compile Include="XInput\Keystroke.cs" />
+    <Compile Include="XInput\Point.cs" />
+    <Compile Include="XInput\State.cs" />
+    <Compile Include="XInput\Vibration.cs" />
+    <Compile Include="XInput\XInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

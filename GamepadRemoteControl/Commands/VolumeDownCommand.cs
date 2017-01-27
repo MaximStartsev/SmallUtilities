@@ -6,15 +6,15 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "volumedown")]
-    internal sealed class VolumeDownCommand : ICommand
+    public sealed class VolumeDownCommand : Command
     {
         private Action _action;
         [XmlIgnore]
-        public Action Action
+        public override Action Action
         {
             get
             {
-                if (_action != null)
+                if (_action == null)
                 {
                     _action = new Action(() =>
                     {
@@ -25,7 +25,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
             }
         }
         [XmlIgnore]
-        public string Title
+        public override string Title
         {
             get
             {

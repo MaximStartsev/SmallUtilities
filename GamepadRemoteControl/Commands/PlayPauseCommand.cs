@@ -6,15 +6,15 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "playpause")]
-    internal sealed class PlayPauseCommand : ICommand
+    public sealed class PlayPauseCommand : Command
     {
         private Action _action;
         [XmlIgnore]
-        public Action Action
+        public override Action Action
         {
             get
             {
-                if (_action != null)
+                if (_action == null)
                 {
                     _action = new Action(() =>
                     {
@@ -25,7 +25,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
             }
         }
         [XmlIgnore]
-        public string Title
+        public override string Title
         {
             get
             {

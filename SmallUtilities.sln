@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodSelector", "FoodSelecto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5D4D2F08-F426-43F1-8831-82BA418231B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePadRemoteController", "GamePadRemoteController\GamePadRemoteController.csproj", "{D0736560-4674-4B53-A6E4-41F7EFC29810}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaCompiler", "MangaCompiler\MangaCompiler.csproj", "{7D99A8F8-808D-4ACB-B916-9E9B6716476C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamepadRemoteControl", "GamepadRemoteControl\GamepadRemoteControl.csproj", "{A55082A3-4B5F-4E0C-8508-AC740EDF9619}"
@@ -39,10 +37,6 @@ Global
 		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D4D2F08-F426-43F1-8831-82BA418231B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0736560-4674-4B53-A6E4-41F7EFC29810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0736560-4674-4B53-A6E4-41F7EFC29810}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0736560-4674-4B53-A6E4-41F7EFC29810}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0736560-4674-4B53-A6E4-41F7EFC29810}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D99A8F8-808D-4ACB-B916-9E9B6716476C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D99A8F8-808D-4ACB-B916-9E9B6716476C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D99A8F8-808D-4ACB-B916-9E9B6716476C}.Release|Any CPU.ActiveCfg = Release|Any CPU

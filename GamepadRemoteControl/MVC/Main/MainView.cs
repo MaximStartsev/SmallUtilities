@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MaximStartsev.GamepadRemoteControl
+namespace MaximStartsev.GamepadRemoteControl.MVC.Main
 {
     internal sealed class MainView
     {
@@ -15,7 +15,6 @@ namespace MaximStartsev.GamepadRemoteControl
             Console.WriteLine("help - помощь.");
             Console.WriteLine("show-config - отображение на экране текущей конфигурации.");
             Console.WriteLine("set-command - устанавливает значение для параметра.");
-            Console.WriteLine("save - сохраняет конфигурацию приложения.");
         }
         public void ShowConfig(IDictionary<string, string> commands)
         {
@@ -31,29 +30,33 @@ namespace MaximStartsev.GamepadRemoteControl
             Console.WriteLine(ex.ToString());
             Console.ForegroundColor = ConsoleColor.Gray;
         }
-        #region set-command
-        public void ShowButtons(IEnumerable<string> buttons)
+        public void ShowWelcome()
         {
-            var counter = 0;
-            Console.WriteLine("Введите номер или имя кнопки из списка:");
-            foreach (var button in buttons)
-            {
-                Console.WriteLine(String.Format("{0}. {1}", ++counter, button));
-            }
+            //todo
         }
-        public void ShowCommands(IEnumerable<string> commands)
-        {
-            var counter = 0;
-            Console.WriteLine("Введите номер или имя команды из списка:");
-            foreach (var command in commands)
-            {
-                Console.WriteLine(String.Format("{0}. {1}", ++counter, command));
-            }
-        }
-        public void SetCommandComplete()
-        {
-            Console.WriteLine("Готово");
-        }
-        #endregion
+        //#region set-command
+        //public void ShowButtons(IEnumerable<string> buttons)
+        //{
+        //    var counter = 0;
+        //    Console.WriteLine("Введите номер или имя кнопки из списка:");
+        //    foreach (var button in buttons)
+        //    {
+        //        Console.WriteLine(String.Format("{0}. {1}", ++counter, button));
+        //    }
+        //}
+        //public void ShowCommands(IEnumerable<string> commands)
+        //{
+        //    var counter = 0;
+        //    Console.WriteLine("Введите номер или имя команды из списка:");
+        //    foreach (var command in commands)
+        //    {
+        //        Console.WriteLine(String.Format("{0}. {1}", ++counter, command));
+        //    }
+        //}
+        //public void SetCommandComplete()
+        //{
+        //    Console.WriteLine("Готово");
+        //}
+        //#endregion
     }
 }

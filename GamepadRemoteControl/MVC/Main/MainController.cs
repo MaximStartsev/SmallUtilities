@@ -2,35 +2,19 @@
 using MaximStartsev.GamepadRemoteControl.MVC.SetCommand;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Xml.Serialization;
 
-namespace MaximStartsev.GamepadRemoteControl
+namespace MaximStartsev.GamepadRemoteControl.MVC.Main
 {
     internal sealed class MainController
     {
-        private const string ConfigFilename = "config.xml";
 
         private MainView _mainView;
-        private MainModel _mainModel;
+        public MainModel MainModel;
         public MainController()
         {
             _mainView = new MainView();
-
-            if (File.Exists(ConfigFilename))
-            {
-                var serializer = new XmlSerializer(typeof(MainModel));
-                using (var config = File.OpenRead(ConfigFilename))
-                {
-                    _mainModel = (MainModel)serializer.Deserialize(config);
-                }
-            }
-            else
-            {
-                _mainModel = new MainModel();
-            }
+            MainModel = MainModelSerializer.Load();
         }
 
         public void Run()
@@ -67,9 +51,9 @@ namespace MaximStartsev.GamepadRemoteControl
         {
             try
             {
-                var properies = _mainModel.GetType().GetProperties().Where(p => p.PropertyType.IsAssignableFrom(typeof(ICommand)));
+                var properies = MainModel.GetType().GetProperties().Where(p => p.PropertyType.IsAssignableFrom(typeof(Command)));
                 _mainView.ShowConfig(properies.ToDictionary(p => p.Name, p => {
-                    var value = (ICommand)p.GetValue(_mainModel);
+                    var value = (Command)p.GetValue(MainModel);
                     return value == null ? String.Empty : value.GetType().Name;
                 }));
             }
@@ -81,10 +65,18 @@ namespace MaximStartsev.GamepadRemoteControl
         #region set command
         private void SetCommand(IEnumerable<string> commandParameters)
         {
-            new SetCommandController(_mainModel.GetType().GetProperties().Where(p=>p.PropertyType.IsAssignableFrom(typeof(ICommand))),
-                _mainModel.Commands,
-                (property, commandType) => property.SetValue(_mainModel, Activator.CreateInstance(commandType)))
-                    .Run(commandParameters);
+            new SetCommandController(MainModel.GetType().GetProperties().Where(p => p.PropertyType.IsAssignableFrom(typeof(Command))),
+                MainModel.Commands,
+                (property, commandType, parameters) =>
+                {
+                    var command = Activator.CreateInstance(commandType);
+                    foreach (var parameter in parameters)
+                    {
+                        parameter.Key.SetValue(command, parameter.Value);
+                    }
+                    property.SetValue(MainModel, command);
+                    MainModelSerializer.Save(MainModel);
+                }).Run(commandParameters);
         }
 
         #endregion

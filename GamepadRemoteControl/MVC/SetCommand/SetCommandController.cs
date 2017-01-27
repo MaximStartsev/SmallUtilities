@@ -1,4 +1,5 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Commands;
+using MaximStartsev.GamepadRemoteControl.Meta;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,13 @@ using System.Reflection;
 
 namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
 {
+    //todo параметры команды
     internal sealed class SetCommandController
     {
         private readonly SetCommandModel _model;
         private readonly SetCommandView _view;
-        private readonly Action<PropertyInfo, Type> _setCommandAction;
-        public SetCommandController(IEnumerable<PropertyInfo> buttons, IEnumerable<Type> commands, Action<PropertyInfo, Type> setCommandAction)
+        private readonly Action<PropertyInfo, Type, Dictionary<PropertyInfo, string>> _setCommandAction;
+        public SetCommandController(IEnumerable<PropertyInfo> buttons, IEnumerable<Type> commands, Action<PropertyInfo, Type, Dictionary<PropertyInfo, string>> setCommandAction)
         {
             _model = new SetCommandModel(buttons, commands);
             _view = new SetCommandView();
@@ -37,25 +39,29 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
                         _view.ShowError(new Exception(String.Format("Не удалось найти команду '{0}'", arguments.ElementAt(1))));
                         commandType = GetCommand();
                     }
-                    SetCommand(buttonProp, commandType);
+                    //todo сделать так же парсинг параметров
+                    var parameters = GetCommandParameters(commandType);
+                    SetCommand(buttonProp, commandType, parameters);
                 }
                 else
                 {
                     var command = GetCommand();
-                    SetCommand(buttonProp, command);
+                    var parameters = GetCommandParameters(command);
+                    SetCommand(buttonProp, command, parameters);
                 }
             }
             else
             {
                 var button = GetButton();
                 var command = GetCommand();
-                SetCommand(button, command);
+                var parameters = GetCommandParameters(command);
+                SetCommand(button, command, parameters);
             }
         }
 
         private PropertyInfo GetButton()
         {
-            var buttons = _model.Buttons.Where(t => typeof(ICommand).IsAssignableFrom(t.PropertyType)).Select(b => b.Name);
+            var buttons = _model.Buttons.Where(t => typeof(Command).IsAssignableFrom(t.PropertyType)).Select(b => b.Name);
             string propertyName = null;
             do
             {
@@ -131,10 +137,24 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             }
             return false;
         }
-        private void SetCommand(PropertyInfo property, Type commandType)
+        private Dictionary<PropertyInfo, string> GetCommandParameters(Type commandType)
         {
-            _setCommandAction(property, commandType);
+            var props = commandType.GetProperties();
+            var parameters = commandType.GetProperties().Where(p=>p.CustomAttributes.Any() && p.CustomAttributes.First().AttributeType == typeof(CommandParameterAttribute));
+            if (!parameters.Any()) return new Dictionary<PropertyInfo, string>();
+            return parameters.ToDictionary(p => p, p => GetCommandParameter(p));
+        }
+        private string GetCommandParameter(PropertyInfo property)
+        {
+            _view.ShowCommandParameter(property.Name);
+            return Console.ReadLine();
+        }
+
+        private void SetCommand(PropertyInfo property, Type commandType, Dictionary<PropertyInfo, string> parameters)
+        {
+            _setCommandAction(property, commandType, parameters);
             _view.SetCommandComplete();
         }
     }
+
 }

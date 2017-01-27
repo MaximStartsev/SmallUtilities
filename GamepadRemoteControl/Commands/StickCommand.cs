@@ -1,7 +1,7 @@
 ﻿
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
-    internal interface IStickCommand: ICommand
+    public abstract class StickCommand: Command
     {
     }
 }

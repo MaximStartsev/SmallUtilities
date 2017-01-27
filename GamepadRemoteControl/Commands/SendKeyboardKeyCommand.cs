@@ -1,13 +1,15 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Meta;
-using MaximStartsev.GamePadRemoteController;
 using System;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
-    [Alias(Title = "volumeup")]
-    public sealed class VolumeUpCommand : Command
+    [Alias(Title = "keyboardkey")]
+    public class SendKeyboardKeyCommand : Command
     {
+        [CommandParameter]
+        public string Key { get; set; }
         private Action _action;
         [XmlIgnore]
         public override Action Action
@@ -16,9 +18,9 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
             {
                 if (_action == null)
                 {
-                    _action = new Action(()=>
+                    _action = new Action(() =>
                     {
-                        InteropHelper.PushKeyboard(ConsoleKey.VolumeUp);
+                        SendKeys.SendWait(Key);
                     });
                 }
                 return _action;
@@ -29,7 +31,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
         {
             get
             {
-                return "Volume Up";
+                return "Keyboard Key";
             }
         }
     }

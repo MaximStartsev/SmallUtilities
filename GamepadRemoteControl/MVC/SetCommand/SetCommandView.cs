@@ -33,5 +33,9 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             Console.WriteLine(ex.ToString());
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+        public void ShowCommandParameter(string name)
+        {
+            Console.WriteLine(String.Format("Введите значение для параметра {0}", name));
+        }
     }
 }
