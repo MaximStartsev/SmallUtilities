@@ -4,7 +4,7 @@
 using MaximStartsev.GamePadRemoteControl.XInput;
 using System;
 
-namespace MaximStartsev.GamePadRemoteControl.XBox
+namespace MaximStartsev.GamePadRemoteControl.XBox.Events
 {
     public sealed class ControllerStateChangedEventArgs : EventArgs
     {

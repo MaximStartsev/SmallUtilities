@@ -69,8 +69,12 @@
     <Compile Include="MVC\SetCommand\SetCommandView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XBox\ButtonState.cs" />
+    <Compile Include="XBox\Events\ControllerButtonClickEventArgs.cs" />
+    <Compile Include="XBox\Events\ControllerButtonDownEventArgs.cs" />
+    <Compile Include="XBox\Events\ControllerButtonUpEventArgs.cs" />
     <Compile Include="XBox\XBoxController.cs" />
-    <Compile Include="XBox\ControllerStateChangedEventArgs.cs" />
+    <Compile Include="XBox\Events\ControllerStateChangedEventArgs.cs" />
     <Compile Include="XInput\BatteryInformation.cs" />
     <Compile Include="XInput\Capabilities.cs" />
     <Compile Include="XInput\Constants\BatteryDeviceType.cs" />

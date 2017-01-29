@@ -31,7 +31,6 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
                         var foregroundProcess = InteropHelper.GetActiveProcess();
                         //Следующий экран
                         var screen = GetNextScreen(foregroundProcess);
-                        Debug.WriteLine(screen.DeviceName);
                         InteropHelper.MoveWindow(foregroundProcess, screen);
                     });
                 }

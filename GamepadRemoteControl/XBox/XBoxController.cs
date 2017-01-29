@@ -1,10 +1,16 @@
 ﻿//***********************************************
 // based on a https://www.codeproject.com/articles/492473/using-xinput-to-access-an-xbox-controller-in-m
 //**********************************************
+using MaximStartsev.GamepadRemoteControl.XBox.Events;
+using MaximStartsev.GamePadRemoteControl.XBox.Events;
 using MaximStartsev.GamePadRemoteControl.XInput;
 using MaximStartsev.GamePadRemoteControl.XInput.Constants;
 using System;
 using System.Threading;
+using System.Linq;
+using System.Collections.Generic;
+using MaximStartsev.GamepadRemoteControl.XBox;
+using System.Diagnostics;
 
 namespace MaximStartsev.GamePadRemoteControl.XBox
 {
@@ -55,8 +61,28 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
         public const int LAST_CONTROLLER_INDEX = MAX_CONTROLLER_COUNT - 1;
 
         static XBoxController[] Controllers;
+        #region events
+        public event EventHandler<ControllerButtonDownEventArgs> ButtonDown;
+        private void InvokeButtonDown(ButtonFlags button)
+        {
+            ButtonDown?.Invoke(this, new ControllerButtonDownEventArgs(button));
+        }
 
+        public event EventHandler<ControllerButtonUpEventArgs> ButtonUp;
+        private void InvokeButtonUp(ButtonFlags button)
+        {
+            ButtonUp?.Invoke(this, new ControllerButtonUpEventArgs(button));
+        }
 
+        public event EventHandler<ControllerButtonUpEventArgs> ButtonClick;
+        private void InvokeButtonClick(ButtonFlags button)
+        {
+            ButtonClick(this, new ControllerButtonUpEventArgs(button));
+        }
+
+        public event EventHandler LeftStickMotion;//todo
+        public event EventHandler RightStickMotion;//todo
+        #endregion
         static XBoxController()
         {
             Controllers = new XBoxController[MAX_CONTROLLER_COUNT];
@@ -65,7 +91,7 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
             {
                 Controllers[i] = new XBoxController(i);
             }
-            UpdateFrequency = 100;//Чем больше это число, тем меньше обновлений состояния геймпада, по-умолчанию, 25
+            UpdateFrequency = 25;//Чем больше это число, тем меньше обновлений состояния геймпада, по-умолчанию, 25
         }
 
         public event EventHandler<ControllerStateChangedEventArgs> StateChanged = null;
@@ -79,6 +105,30 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
         {
             _playerIndex = playerIndex;
             gamepadStatePrev.Copy(gamepadStateCurrent);
+
+            var buttons = (IEnumerable<ButtonFlags>)Enum.GetValues(typeof(ButtonFlags));
+            var buttonStates = buttons.Select(b => new ButtonState(this, b));
+            foreach (var state in buttonStates)
+            {
+                state.ButtonDown += State_ButtonDown;
+                state.ButtonUp += State_ButtonUp;
+                state.ButtonClick += State_ButtonClick;
+            }
+        }
+
+        private void State_ButtonClick(object sender, ControllerButtonUpEventArgs e)
+        {
+            InvokeButtonClick(e.Button);
+        }
+
+        private void State_ButtonUp(object sender, ControllerButtonUpEventArgs e)
+        {
+            InvokeButtonUp(e.Button);
+        }
+
+        private void State_ButtonDown(object sender, ControllerButtonDownEventArgs e)
+        {
+            InvokeButtonDown(e.Button);
         }
 
         public void UpdateBatteryState()
@@ -107,79 +157,77 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
 
 
         #region Digital Button States
-        public bool IsDPadUpPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_DPAD_UP); }
-        }
+        //public bool IsDPadUpPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.DpadUp); }
+        //}
 
-        public bool IsDPadDownPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_DPAD_DOWN); }
-        }
+        //public bool IsDPadDownPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.DpadDown); }
+        //}
 
-        public bool IsDPadLeftPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_DPAD_LEFT); }
-        }
+        //public bool IsDPadLeftPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.DPadLeft); }
+        //}
 
-        public bool IsDPadRightPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_DPAD_RIGHT); }
-        }
+        //public bool IsDPadRightPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.DPadRight); }
+        //}
 
-        public bool IsAPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_A); }
-        }
+        //public bool IsAPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.A); }
+        //}
 
-        public bool IsBPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_B); }
-        }
+        //public bool IsBPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.B); }
+        //}
 
-        public bool IsXPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_X); }
-        }
+        //public bool IsXPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.X); }
+        //}
 
-        public bool IsYPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_Y); }
-        }
-
-
-        public bool IsBackPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_BACK); }
-        }
+        //public bool IsYPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.Y); }
+        //}
+        //public bool IsBackPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.Back); }
+        //}
 
 
-        public bool IsStartPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_START); }
-        }
+        //public bool IsStartPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.Start); }
+        //}
 
 
-        public bool IsLeftShoulderPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_LEFT_SHOULDER); }
-        }
+        //public bool IsLeftShoulderPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.LeftShoulder); }
+        //}
 
 
-        public bool IsRightShoulderPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_RIGHT_SHOULDER); }
-        }
+        //public bool IsRightShoulderPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.RightShoulder); }
+        //}
 
-        public bool IsLeftStickPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_LEFT_THUMB); }
-        }
+        //public bool IsLeftStickPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.LeftThumb); }
+        //}
 
-        public bool IsRightStickPressed
-        {
-            get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.XINPUT_GAMEPAD_RIGHT_THUMB); }
-        }
+        //public bool IsRightStickPressed
+        //{
+        //    get { return gamepadStateCurrent.Gamepad.IsButtonPressed((int)ButtonFlags.RightThumb); }
+        //}
         #endregion
 
         #region Analogue Input States
@@ -308,7 +356,6 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
             Vibration vibration = new Vibration() { LeftMotorSpeed = (ushort)(65535d * leftMotor), RightMotorSpeed = (ushort)(65535d * rightMotor) };
             Vibrate(vibration, length);
         }
-
 
         public void Vibrate(Vibration strength)
         {
