@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
+    [XmlInclude(typeof(MoveToNextMonitorCommand))]
     [XmlInclude(typeof(SendKeyboardKeyCommand))]
     [XmlInclude(typeof(VolumeUpCommand))]
     [XmlInclude(typeof(VolumeDownCommand))]

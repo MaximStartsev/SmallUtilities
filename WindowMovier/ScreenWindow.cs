@@ -38,7 +38,7 @@ namespace MaximStartsev.SmallUtilities.WindowMovier
         }
 
         public void Move(Screen screen)
-        { 
+        {
             var p = new Point();
             p.X = screen.WorkingArea.Left;
             p.Y = screen.WorkingArea.Top;

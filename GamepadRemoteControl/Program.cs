@@ -1,5 +1,6 @@
 ﻿using MaximStartsev.GamepadRemoteControl.MVC.Main;
 using MaximStartsev.GamePadRemoteControl.XBox;
+using System;
 using System.Diagnostics;
 
 namespace MaximStartsev.GamepadRemoteControl
@@ -21,6 +22,8 @@ namespace MaximStartsev.GamepadRemoteControl
             catch (System.Exception ex)
             {
                 Debug.WriteLine(ex);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.ToString());
             }
         }
 

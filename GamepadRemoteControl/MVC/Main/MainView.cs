@@ -32,31 +32,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
         }
         public void ShowWelcome()
         {
-            //todo
+            Console.WriteLine("Введите команду");
         }
-        //#region set-command
-        //public void ShowButtons(IEnumerable<string> buttons)
-        //{
-        //    var counter = 0;
-        //    Console.WriteLine("Введите номер или имя кнопки из списка:");
-        //    foreach (var button in buttons)
-        //    {
-        //        Console.WriteLine(String.Format("{0}. {1}", ++counter, button));
-        //    }
-        //}
-        //public void ShowCommands(IEnumerable<string> commands)
-        //{
-        //    var counter = 0;
-        //    Console.WriteLine("Введите номер или имя команды из списка:");
-        //    foreach (var command in commands)
-        //    {
-        //        Console.WriteLine(String.Format("{0}. {1}", ++counter, command));
-        //    }
-        //}
-        //public void SetCommandComplete()
-        //{
-        //    Console.WriteLine("Готово");
-        //}
-        //#endregion
     }
 }

@@ -8,7 +8,6 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
 {
     internal sealed class MainController
     {
-
         private MainView _mainView;
         public MainModel MainModel;
         public MainController()
@@ -19,6 +18,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
 
         public void Run()
         {
+            _mainView.ShowWelcome();
             DoCommand();
         }
 
@@ -78,7 +78,6 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
                     MainModelSerializer.Save(MainModel);
                 }).Run(commandParameters);
         }
-
         #endregion
     }
 }

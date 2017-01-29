@@ -39,6 +39,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\MoveToNextMonitorCommand.cs" />
     <Compile Include="Commands\SendKeyboardKeyCommand.cs" />
     <Compile Include="Commands\StickCommand.cs" />
     <Compile Include="Commands\PlayPauseCommand.cs" />

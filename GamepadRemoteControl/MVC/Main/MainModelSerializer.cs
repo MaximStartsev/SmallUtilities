@@ -16,7 +16,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
                     return (MainModel)serializer.Deserialize(stream);
                 }
             }
-            return new MainModel();//todo set defaultvalues
+            return new MainModel();//todo set default values
         }
         public static void Save(MainModel model)
         {
