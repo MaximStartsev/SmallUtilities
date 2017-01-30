@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\MoveToNextMonitorCommand.cs" />
+    <Compile Include="Commands\MoveToPrevMonitorCommand.cs" />
     <Compile Include="Commands\SendKeyboardKeyCommand.cs" />
     <Compile Include="Commands\StickCommand.cs" />
     <Compile Include="Commands\PlayPauseCommand.cs" />

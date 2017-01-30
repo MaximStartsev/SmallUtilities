@@ -8,14 +8,9 @@ using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
-    /// <summary>
-    /// todo необходимо доделать:
-    /// 1. при перенесении окна учитывать его координаты относительно окна, на котором он был.
-    /// 2. учитывать максимизировано ли окно
-    /// 3. учитывать полноэкранные приложения
-    /// </summary>
-    [Alias(Title = "movetonextmonitor")]
-    public class MoveToNextMonitorCommand : Command
+    //todo Доделать аналогично перемещению на следующий экран
+    [Alias(Title = "movetoprevmonitor")]
+    public sealed class MoveToPrevMonitorCommand:Command
     {
         private Action _action;
         [XmlIgnore]
@@ -30,7 +25,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
                         //Текущий активный процесс
                         var foregroundProcess = InteropHelper.GetActiveProcess();
                         //Следующий экран
-                        var screen = GetNextScreen(foregroundProcess);
+                        var screen = GetPrevScreen(foregroundProcess);
                         InteropHelper.MoveWindow(foregroundProcess, screen);
                     });
                 }
@@ -46,11 +41,11 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
             }
         }
 
-        private Screen GetNextScreen(Process process)
+        private Screen GetPrevScreen(Process process)
         {
             var pos = InteropHelper.GetWindowPosition(process.MainWindowHandle);
-            var sortedScreens = Screen.AllScreens.OrderBy(s => s.WorkingArea.X);
-            var currentScreen = sortedScreens.LastOrDefault(s => s.WorkingArea.Left <= pos.X);
+            var sortedScreens = Screen.AllScreens.OrderByDescending(s => s.WorkingArea.X);
+            var currentScreen = sortedScreens.LastOrDefault(s => s.WorkingArea.Left >= pos.X);
             //Если окно максимизировано, будет екцепшн
             return currentScreen == Screen.AllScreens.Last() ? Screen.AllScreens.First() : Screen.AllScreens.SkipWhile(s => s != currentScreen).Skip(1).First();
         }

@@ -2,7 +2,6 @@
 using MaximStartsev.GamePadRemoteControl.XBox;
 using MaximStartsev.GamePadRemoteControl.XInput.Constants;
 using System;
-using System.Diagnostics;
 
 namespace MaximStartsev.GamepadRemoteControl.XBox
 {
