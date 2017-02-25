@@ -51,7 +51,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
         {
             try
             {
-                var properies = MainModel.GetType().GetProperties().Where(p => p.PropertyType.IsAssignableFrom(typeof(Command)));
+                var properies = MainModel.GetType().GetProperties().Where(p => typeof(Command).IsAssignableFrom(p.PropertyType));
                 _mainView.ShowConfig(properies.ToDictionary(p => p.Name, p => {
                     var value = (Command)p.GetValue(MainModel);
                     return value == null ? String.Empty : value.GetType().Name;
@@ -65,7 +65,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
         #region set command
         private void SetCommand(IEnumerable<string> commandParameters)
         {
-            new SetCommandController(MainModel.GetType().GetProperties().Where(p => p.PropertyType.IsAssignableFrom(typeof(Command))),
+            new SetCommandController(MainModel.GetType().GetProperties().Where(p => typeof(Command).IsAssignableFrom(p.PropertyType)),
                 MainModel.Commands,
                 (property, commandType, parameters) =>
                 {

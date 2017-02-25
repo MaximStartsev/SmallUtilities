@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "volumedown")]
-    public sealed class VolumeDownCommand : Command
+    public sealed class VolumeDownCommand : ButtonCommand
     {
         private Action _action;
         [XmlIgnore]

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "runprogram")]
-    public sealed class RunProgramCommand : Command
+    public sealed class RunProgramCommand : ButtonCommand
     {
         [CommandParameter]
         private string ExeFile { get; set; }

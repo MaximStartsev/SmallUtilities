@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "playpause")]
-    public sealed class PlayPauseCommand : Command
+    public sealed class PlayPauseCommand : ButtonCommand
     {
         private Action _action;
         [XmlIgnore]

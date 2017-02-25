@@ -15,7 +15,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
     /// 3. учитывать полноэкранные приложения
     /// </summary>
     [Alias(Title = "movetonextmonitor")]
-    public class MoveToNextMonitorCommand : Command
+    public class MoveToNextMonitorCommand : ButtonCommand
     {
         private Action _action;
         [XmlIgnore]

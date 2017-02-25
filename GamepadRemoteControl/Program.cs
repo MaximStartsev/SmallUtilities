@@ -16,6 +16,8 @@ namespace MaximStartsev.GamepadRemoteControl
                 var controller = XBoxController.RetrieveController(0);
                 //controller.StateChanged += Controller_StateChanged;
                 controller.ButtonClick += Controller_ButtonClick;
+                controller.LeftStickMotion += Controller_LeftStickMotion;
+                controller.RightStickMotion += Controller_RightStickMotion;
                 XBoxController.StartPolling();
                 _mainController = new MainController();
                 _mainController.Run();
@@ -27,6 +29,18 @@ namespace MaximStartsev.GamepadRemoteControl
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        private static void Controller_RightStickMotion(object sender, XBox.Events.StickMotionEventArgs e)
+        {
+            Debug.WriteLine("Right stick " + e.Position);
+            if (_mainController.MainModel.RightStick != null) _mainController.MainModel.RightStick.Action(e.Position);
+        }
+
+        private static void Controller_LeftStickMotion(object sender, XBox.Events.StickMotionEventArgs e)
+        {
+            Debug.WriteLine("Left stick " + e.Position);
+            if (_mainController.MainModel.LeftStick != null) _mainController.MainModel.LeftStick.Action(e.Position);
         }
 
         private static void Controller_ButtonClick(object sender, XBox.Events.ControllerButtonUpEventArgs e)

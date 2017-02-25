@@ -10,7 +10,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     //todo Доделать аналогично перемещению на следующий экран
     [Alias(Title = "movetoprevmonitor")]
-    public sealed class MoveToPrevMonitorCommand:Command
+    public sealed class MoveToPrevMonitorCommand:ButtonCommand
     {
         private Action _action;
         [XmlIgnore]

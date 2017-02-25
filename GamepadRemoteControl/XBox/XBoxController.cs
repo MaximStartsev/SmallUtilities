@@ -77,11 +77,19 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
         public event EventHandler<ControllerButtonUpEventArgs> ButtonClick;
         private void InvokeButtonClick(ButtonFlags button)
         {
-            ButtonClick(this, new ControllerButtonUpEventArgs(button));
+            ButtonClick?.Invoke(this, new ControllerButtonUpEventArgs(button));
         }
 
-        public event EventHandler LeftStickMotion;//todo
-        public event EventHandler RightStickMotion;//todo
+        public event EventHandler<StickMotionEventArgs> LeftStickMotion;
+        private void InvokeLeftStickMotion(Point position)
+        {
+            LeftStickMotion?.Invoke(this, new StickMotionEventArgs(position));
+        }
+        public event EventHandler<StickMotionEventArgs> RightStickMotion;
+        private void InvokeRightStickMotion(Point position)
+        {
+            RightStickMotion?.Invoke(this, new StickMotionEventArgs(position));
+        }
         #endregion
         static XBoxController()
         {
@@ -114,6 +122,14 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
                 state.ButtonUp += State_ButtonUp;
                 state.ButtonClick += State_ButtonClick;
             }
+            (new StickState(this, StickState.StickType.Left)).StickMotion += (s, e) =>
+              {
+                  InvokeLeftStickMotion(e.Position);
+              };
+            (new StickState(this, StickState.StickType.Right)).StickMotion+=(s,e)=>
+            {
+                InvokeRightStickMotion(e.Position);
+            };
         }
 
         private void State_ButtonClick(object sender, ControllerButtonUpEventArgs e)

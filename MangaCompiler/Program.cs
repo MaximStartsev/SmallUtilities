@@ -23,11 +23,25 @@ namespace MangaCompiler
                 Directory.CreateDirectory(destination);
 
                 Console.WriteLine("Распаковка архивов...");
-                foreach(var file in files.Where(f=>f.EndsWith(".rar") || f.EndsWith(".zip")))
+                foreach (var file in files.Where(f => f.EndsWith(".rar") || f.EndsWith(".zip")))
                 {
                     Archivator.ExtractArchive(file, Path.Combine(destination, Path.GetFileNameWithoutExtension(file)));
                 }
-
+                foreach (var file in files.Where(f => f.EndsWith(".jpg") || f.EndsWith(".png")))
+                {
+                    var newfile = Path.GetFileName(file);
+                    var index = file.LastIndexOf("\\");
+                    var path = file.Substring(0, index);
+                    index = path.LastIndexOf("\\");
+                    path = path.Substring(index + 1);
+                    path = Path.Combine(destination, path);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    //newfile = Path.Combine(path, newfile);
+                    File.Copy(file, Path.Combine(path, newfile));
+                }
                 Console.WriteLine(String.Format("Создание pdf файла {0}...", args[1]));
                 var tempFiles = GetFiles(destination).Where(f=>f.EndsWith(".jpg") || f.EndsWith(".png"));
                 PdfCreator.Create(tempFiles, args[1]);

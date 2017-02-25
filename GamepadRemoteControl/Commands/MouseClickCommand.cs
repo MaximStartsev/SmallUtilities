@@ -1,36 +1,31 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Meta;
 using MaximStartsev.GamePadRemoteController;
 using System;
-using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
-    [Alias(Title = "volumeup")]
-    public sealed class VolumeUpCommand : ButtonCommand
+    [Alias(Title = "mouseclick")]
+    public sealed class MouseClickCommand : ButtonCommand
     {
+        //todo: Сделать, чтобы можно было задавать параметр с типом кнопки
+        //[CommandParameter]
+        //public string Button { get; set; }
         private Action _action;
-        [XmlIgnore]
         public override Action Action
         {
             get
             {
-                if (_action == null)
+                if(_action == null)
                 {
                     _action = new Action(()=>
                     {
-                        InteropHelper.PushKeyboard(ConsoleKey.VolumeUp);
+                        InteropHelper.MouseLeftClick();
                     });
                 }
                 return _action;
             }
         }
-        [XmlIgnore]
-        public override string Title
-        {
-            get
-            {
-                return "Volume Up";
-            }
-        }
+
+        public override string Title { get { return "Mouse Click"; } }
     }
 }

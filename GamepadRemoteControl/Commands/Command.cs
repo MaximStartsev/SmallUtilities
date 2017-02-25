@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
@@ -10,10 +9,10 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
     [XmlInclude(typeof(VolumeDownCommand))]
     [XmlInclude(typeof(PlayPauseCommand))]
     [XmlInclude(typeof(RunProgramCommand))]
-    [XmlInclude(typeof(StickCommand))]
+    [XmlInclude(typeof(MouseStickCommand))]
+    [XmlInclude(typeof(MouseClickCommand))]
     public abstract class Command
     {
         public abstract string Title { get; }
-        public abstract Action Action { get; }
     }
 }

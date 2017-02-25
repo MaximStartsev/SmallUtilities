@@ -8,6 +8,28 @@ namespace MaximStartsev.GamePadRemoteController
 {
     internal static class InteropHelper
     {
+        #region mouse click
+        //Клик мыши
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        private static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+        //Mouse actions
+        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
+        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;
+        public static void MouseLeftClick()
+        {
+            var X = (uint)Cursor.Position.X;
+            var Y = (uint)Cursor.Position.Y;
+            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+        }
+        public static void MouseRightClick()
+        {
+            var X = (uint)Cursor.Position.X;
+            var Y = (uint)Cursor.Position.Y;
+            mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
+        }
+        #endregion
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
         public static void PushKeyboard(ConsoleKey key)

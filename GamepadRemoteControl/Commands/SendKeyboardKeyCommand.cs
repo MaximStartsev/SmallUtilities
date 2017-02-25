@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace MaximStartsev.GamepadRemoteControl.Commands
 {
     [Alias(Title = "keyboardkey")]
-    public class SendKeyboardKeyCommand : Command
+    public class SendKeyboardKeyCommand : ButtonCommand
     {
         [CommandParameter]
         public string Key { get; set; }

@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ButtonCommand.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\MouseClickCommand.cs" />
+    <Compile Include="Commands\MouseStickCommand.cs" />
     <Compile Include="Commands\MoveToNextMonitorCommand.cs" />
     <Compile Include="Commands\MoveToPrevMonitorCommand.cs" />
     <Compile Include="Commands\SendKeyboardKeyCommand.cs" />
@@ -74,6 +77,8 @@
     <Compile Include="XBox\Events\ControllerButtonClickEventArgs.cs" />
     <Compile Include="XBox\Events\ControllerButtonDownEventArgs.cs" />
     <Compile Include="XBox\Events\ControllerButtonUpEventArgs.cs" />
+    <Compile Include="XBox\Events\StickMotionEventArgs.cs" />
+    <Compile Include="XBox\StickState.cs" />
     <Compile Include="XBox\XBoxController.cs" />
     <Compile Include="XBox\Events\ControllerStateChangedEventArgs.cs" />
     <Compile Include="XInput\BatteryInformation.cs" />
