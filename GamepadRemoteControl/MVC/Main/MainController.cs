@@ -1,5 +1,6 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Commands;
 using MaximStartsev.GamepadRemoteControl.MVC.SetCommand;
+using MaximStartsev.GamePadRemoteControl.XBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,11 +42,26 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
                 case "setcommand":
                     SetCommand(words.Skip(1));
                     break;
+                case "pause":
+                case "stop":
+                    Pause();
+                    break;
+                case "start":
+                    Start();
+                    break;
                 default:
                     _mainView.UnknownCommand();
                     break;
             }
             DoCommand();
+        }
+        private void Pause()
+        {
+            XBoxController.StopPolling();
+        }
+        private void Start()
+        {
+            XBoxController.StartPolling();
         }
         private void ShowConfig()
         {

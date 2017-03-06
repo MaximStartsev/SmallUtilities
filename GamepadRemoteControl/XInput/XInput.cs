@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace MaximStartsev.GamePadRemoteControl.XInput
 {
-    public static class XInput
+    internal static class XInput
     {
 #if WINDOWS7
         [DllImport("xinput9_1_0.dll")]
@@ -56,21 +56,21 @@ namespace MaximStartsev.GamePadRemoteControl.XInput
 
 
         [DllImport("xinput1_4.dll")]
-        public static extern int XInputGetState
+        internal static extern int XInputGetState
         (
             int dwUserIndex,  // [in] Index of the gamer associated with the device
             ref State pState        // [out] Receives the current state
         );
 
         [DllImport("xinput1_4.dll")]
-        public static extern int XInputSetState
+        internal static extern int XInputSetState
         (
             int dwUserIndex,  // [in] Index of the gamer associated with the device
             ref Vibration pVibration    // [in, out] The vibration information to send to the controller
         );
 
         [DllImport("xinput1_4.dll")]
-        public static extern int XInputGetCapabilities
+        internal static extern int XInputGetCapabilities
         (
             int dwUserIndex,   // [in] Index of the gamer associated with the device
             int dwFlags,       // [in] Input flags that identify the device type
@@ -79,7 +79,7 @@ namespace MaximStartsev.GamePadRemoteControl.XInput
 
 
         [DllImport("xinput1_4.dll")]
-        public static extern int XInputGetBatteryInformation
+        internal static extern int XInputGetBatteryInformation
         (
               int dwUserIndex,        // Index of the gamer associated with the device
               byte devType,            // Which device on this user index
@@ -87,7 +87,7 @@ namespace MaximStartsev.GamePadRemoteControl.XInput
         );
 
         [DllImport("xinput1_4.dll")]
-        public static extern int XInputGetKeystroke
+        internal static extern int XInputGetKeystroke
         (
             int dwUserIndex,              // Index of the gamer associated with the device
             int dwReserved,               // Reserved for future use

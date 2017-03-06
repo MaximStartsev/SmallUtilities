@@ -15,6 +15,8 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
             Console.WriteLine("help - помощь.");
             Console.WriteLine("show-config - отображение на экране текущей конфигурации.");
             Console.WriteLine("set-command - устанавливает значение для параметра.");
+            Console.WriteLine("stop или pause - приостановка работы приложения.");
+            Console.WriteLine("start - продолжение работы приложения.");
         }
         public void ShowConfig(IDictionary<string, string> commands)
         {

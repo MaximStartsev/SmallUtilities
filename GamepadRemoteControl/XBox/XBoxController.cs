@@ -339,7 +339,6 @@ namespace MaximStartsev.GamePadRemoteControl.XBox
 
         public void UpdateState()
         {
-            var X = new Capabilities();
             int result = XInput.XInput.XInputGetState(_playerIndex, ref gamepadStateCurrent);
             IsConnected = (result == 0);
 
