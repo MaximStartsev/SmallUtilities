@@ -16,8 +16,8 @@ namespace MaximStartsev.GamepadRemoteControl
                 controller.ButtonClick += Controller_ButtonClick;
                 controller.LeftStickMotion += Controller_LeftStickMotion;
                 controller.RightStickMotion += Controller_RightStickMotion;
-                XBoxController.StartPolling();
                 _mainController = new MainController();
+                XBoxController.StartPolling();
                 _mainController.Run();
                 XBoxController.StopPolling();
             }

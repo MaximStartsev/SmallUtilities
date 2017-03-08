@@ -46,7 +46,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
             var pos = InteropHelper.GetWindowPosition(process.MainWindowHandle);
             var sortedScreens = Screen.AllScreens.OrderByDescending(s => s.WorkingArea.X);
             var currentScreen = sortedScreens.LastOrDefault(s => s.WorkingArea.Left >= pos.X);
-            //Если окно максимизировано, будет екцепшн
+            if (currentScreen == null) return Screen.AllScreens.Last();
             return currentScreen == Screen.AllScreens.Last() ? Screen.AllScreens.First() : Screen.AllScreens.SkipWhile(s => s != currentScreen).Skip(1).First();
         }
     }
