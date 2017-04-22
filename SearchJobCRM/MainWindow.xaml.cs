@@ -1,5 +1,4 @@
-﻿
-using MaximStartsev.SmallUtilities.Common.MVVM;
+﻿using MaximStartsev.SmallUtilities.Common.MVVM;
 using MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels;
 using System.Windows;
 
