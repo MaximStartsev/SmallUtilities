@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" ShowInTaskbar="False"
-        Title="Window Movier" Height="400" Width="600" Icon="Arrow.ico" >
+        Title="Window Movier" Height="400" Width="600" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
