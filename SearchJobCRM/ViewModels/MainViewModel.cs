@@ -265,7 +265,6 @@ namespace MaximStartsev.SmallUtilities.SearchJobCRM.ViewModels
         {
             try
             {
-                //todo: диалоги не сохраняются
                 _dbContext.SaveChanges();
             }
             catch (Exception ex)

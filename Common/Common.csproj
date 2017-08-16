@@ -54,6 +54,7 @@
     <Compile Include="MVVM\RunViewModel.cs" />
     <Compile Include="MVVM\ShowViewModelBinding.cs" />
     <Compile Include="MVVM\ShowViewModelCommand.cs" />
+    <Compile Include="MVVM\StringToVisibilityConverter.cs" />
     <Compile Include="MVVM\ViewModel.cs" />
     <Compile Include="MVVM\ViewModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
