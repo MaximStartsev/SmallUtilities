@@ -1,4 +1,5 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Commands;
+using MaximStartsev.GamepadRemoteControl.Exceptions;
 using MaximStartsev.GamepadRemoteControl.MVC.SetCommand;
 using MaximStartsev.GamePadRemoteControl.XBox;
 using System;
@@ -19,41 +20,48 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.Main
 
         public void Run()
         {
-            _mainView.ShowWelcome();
             DoCommand();
         }
 
         private void DoCommand()
         {
-            var line = Console.ReadLine();
-            var words = line.Split(new[] { ' ' });
-            switch (words[0].ToLowerInvariant())
+            while (true)
             {
-                case "help":
-                case "?":
-                case "h":
-                    _mainView.ShowHelp();
-                    break;
-                case "show-config":
-                case "showconfig":
-                    ShowConfig();
-                    break;
-                case "set-command":
-                case "setcommand":
-                    SetCommand(words.Skip(1));
-                    break;
-                case "pause":
-                case "stop":
-                    Pause();
-                    break;
-                case "start":
-                    Start();
-                    break;
-                default:
-                    _mainView.UnknownCommand();
-                    break;
+                try
+                {
+                    Console.Clear();
+                    _mainView.ShowWelcome();
+                    var line = Console.ReadLine();
+                    var words = line.Split(new[] { ' ' });
+                    switch (words[0].ToLowerInvariant())
+                    {
+                        case "help":
+                        case "?":
+                        case "h":
+                            _mainView.ShowHelp();
+                            break;
+                        case "show-config":
+                        case "showconfig":
+                            ShowConfig();
+                            break;
+                        case "set-command":
+                        case "setcommand":
+                            SetCommand(words.Skip(1));
+                            break;
+                        case "pause":
+                        case "stop":
+                            Pause();
+                            break;
+                        case "start":
+                            Start();
+                            break;
+                        default:
+                            _mainView.UnknownCommand();
+                            break;
+                    }
+                }
+                catch (BreakException) { }
             }
-            DoCommand();
         }
         private void Pause()
         {

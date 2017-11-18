@@ -1,4 +1,5 @@
 ﻿using MaximStartsev.GamepadRemoteControl.Commands;
+using MaximStartsev.GamepadRemoteControl.Exceptions;
 using MaximStartsev.GamepadRemoteControl.Meta;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             {
                 var button = GetButton();
                 var command = GetCommand();
+
                 var parameters = GetCommandParameters(command);
                 SetCommand(button, command, parameters);
             }
@@ -67,6 +69,8 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             {
                 _view.ShowButtons(buttons);
                 var button = Console.ReadLine().ToLower();
+                if (button == "exit")
+                    throw new BreakException();
                 int buttonNumber;
                 if (Int32.TryParse(button, out buttonNumber))
                 {
@@ -105,6 +109,8 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             {
                 _view.ShowCommands(commands);
                 var command = Console.ReadLine().ToLower();
+                if (command == "exit")
+                    throw new BreakException();
                 int commandNumber;
                 if (Int32.TryParse(command, out commandNumber))
                 {

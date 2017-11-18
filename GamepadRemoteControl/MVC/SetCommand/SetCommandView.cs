@@ -13,6 +13,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             {
                 Console.WriteLine(String.Format("{0}. {1}", ++counter, button));
             }
+            Console.WriteLine("Введите \"exit\" для возвращения к основному диалогу");
         }
         public void ShowCommands(IEnumerable<string> commands)
         {
@@ -22,6 +23,7 @@ namespace MaximStartsev.GamepadRemoteControl.MVC.SetCommand
             {
                 Console.WriteLine(String.Format("{0}. {1}", ++counter, command));
             }
+            Console.WriteLine("Введите \"exit\" для возвращения к основному диалогу");
         }
         public void SetCommandComplete()
         {
