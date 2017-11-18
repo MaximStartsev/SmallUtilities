@@ -11,7 +11,7 @@ namespace MaximStartsev.GamePadRemoteController
         #region mouse click
         //Клик мыши
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        private static extern void mouse_event(UInt32 dwFlags, UInt32 dx, UInt32 dy, UInt32 cButtons, UInt32 dwExtraInfo);
+        private static extern void mouse_event(UInt32 dwFlags, UInt32 dx, UInt32 dy, Int32 cButtons, UInt32 dwExtraInfo);
         //Mouse actions
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
@@ -30,6 +30,17 @@ namespace MaximStartsev.GamePadRemoteController
             mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
         }
         #endregion
+
+        #region mouse scroll
+
+        private const int MOUSEEVENTF_WHEEL = 0x0800;
+        public static void MouseScroll(Int32 y)
+        {
+            mouse_event(MOUSEEVENTF_WHEEL, 0, 0, y, 0);
+        }
+
+        #endregion
+
         [DllImport("user32.dll")]
         private static extern void keybd_event(Byte bVk, Byte bScan, UInt32 dwFlags, Int32 dwExtraInfo);
         public static void PushKeyboard(ConsoleKey key)

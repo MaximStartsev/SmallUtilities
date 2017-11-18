@@ -11,6 +11,7 @@ namespace MaximStartsev.GamepadRemoteControl.Commands
     [XmlInclude(typeof(RunProgramCommand))]
     [XmlInclude(typeof(MouseStickCommand))]
     [XmlInclude(typeof(MouseClickCommand))]
+    [XmlInclude(typeof(ScrollStickCommand))]
     public abstract class Command
     {
         public abstract string Title { get; }

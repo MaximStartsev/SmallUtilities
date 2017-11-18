@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowMovier", "WindowMovier\WindowMovier.csproj", "{F35512B8-EB02-45B4-89E5-24B8DD42D5A0}"
 EndProject
@@ -29,7 +29,6 @@ Global
 		{F35512B8-EB02-45B4-89E5-24B8DD42D5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35512B8-EB02-45B4-89E5-24B8DD42D5A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78B75BCB-61CC-48FE-973D-A6D29CD76F75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46F36B4F-34AF-4157-94B7-2558CAF53224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -43,9 +42,11 @@ Global
 		{7D99A8F8-808D-4ACB-B916-9E9B6716476C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D99A8F8-808D-4ACB-B916-9E9B6716476C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A55082A3-4B5F-4E0C-8508-AC740EDF9619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A55082A3-4B5F-4E0C-8508-AC740EDF9619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A55082A3-4B5F-4E0C-8508-AC740EDF9619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A55082A3-4B5F-4E0C-8508-AC740EDF9619}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4404726B-6B44-4D37-BB17-6406829FEC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4404726B-6B44-4D37-BB17-6406829FEC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4404726B-6B44-4D37-BB17-6406829FEC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4404726B-6B44-4D37-BB17-6406829FEC81}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9815F93C-80F7-42E0-A7BD-0ABF0A093082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -54,5 +55,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77333E05-60B8-4592-94B5-F9758AA8B183}
 	EndGlobalSection
 EndGlobal
